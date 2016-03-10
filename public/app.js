@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('TrukSpot', ['ngRoute', 'ui.bootstrap', 'ngResource', 'myApp.version',
+angular.module('TrukSpot', ['ngRoute', 'ngResource', 'myApp.version',
     'TrukSpot.home','TrukSpot.about', 'TrukSpot.user', 'TrukSpot.myTruck',
     'TrukSpot.services'
 ])
