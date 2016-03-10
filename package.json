@@ -1,0 +1,40 @@
+{
+  "name": "TrukSpot",
+  "private": true,
+  "version": "0.5.0",
+  "description": "An app to help locate food trucks",
+  "dependencies": {
+    "karma": "~0.10",
+    "protractor": "^1.1.1",
+    "http-server": "^0.6.1",
+    "bower": "^1.3.1",
+    "shelljs": "^0.2.6",
+    "karma-junit-reporter": "^0.2.2",
+    "mongoose": "~3.6.13",
+    "body-parser": "~1.0.1",
+    "express": "~4.0.0"
+  },
+  "engines": {
+    "node": "0.12.2",
+    "npm": "2.10.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroku/node-js-getting-started"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "bower install",
+    "test": "karma start karma.conf.js",
+    "test-single-run": "karma start karma.conf.js  --single-run",
+    "update-webdriver": "webdriver-manager update",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor e2e-tests/protractor.conf.js",
+    "express server": "node server.js"
+  }
+}
