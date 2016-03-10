@@ -1,4 +1,4 @@
-# TrukSpot Web App & Server
+# RadicalRatios Web App & Server
 
 This app is deploying whenever we push to master. Merge with caution.
 
@@ -15,6 +15,7 @@ Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https
 Clone down the project, navigate into the directory, and get er all running with...
 
 ```
+$ npm install
 $ npm start
 ```
 
@@ -46,17 +47,3 @@ For more information about using Node.js on Heroku, see these Dev Center article
 
 # Admin Info
 
-###Gmail
-email: trukspot@gmail.com
-
-pw: FormerlyWhyhigh
-
-###Heroku
-Admin
-
-FormerlyWhyhigh
-
-###Twitter
-trukspot@gmail.com
-
-FormerlyWhyhigh
