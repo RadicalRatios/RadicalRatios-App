@@ -3,7 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('TrukSpot', ['ngRoute', 'ngResource', 'myApp.version',
     'TrukSpot.home','TrukSpot.about', 'TrukSpot.user', 'TrukSpot.myTruck',
-    'TrukSpot.services'
+    'TrukSpot.services', 'TrukSpot.about.test', 'Quintus'
 ])
     /**
      *  Non-authed routes:
@@ -15,6 +15,14 @@ angular.module('TrukSpot', ['ngRoute', 'ngResource', 'myApp.version',
             controller: 'AboutCtrl'
         });
     }])
+
+    .config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/about/test', {
+            templateUrl: 'instructor/templates/instructor.html',
+            controller: 'InstructorController'
+        });
+    }])
+
 
     /* TODO: Enable when the app goes v1 */
     //.config(['$routeProvider', function($routeProvider) {
@@ -64,3 +72,4 @@ angular.module('TrukSpot.services', ['ngResource'])
     .factory('EmailContact', ['$resource', function($resource) {
         return $resource('/api/contact');
     }]);
+
