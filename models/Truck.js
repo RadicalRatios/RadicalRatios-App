@@ -1,6 +1,3 @@
-var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
-
 var Truck = new Schema({
     name: String,
     hours: String,
@@ -9,5 +6,3 @@ var Truck = new Schema({
     	longitude: Number,
     }
 });
-
-module.exports = mongoose.model('Truck', Truck);

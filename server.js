@@ -2,16 +2,14 @@
  *  Set up ======================================================================
  */
 var express = require('express');
-var app = express();                 
+var app = express();
 var bodyParser = require('body-parser');
-var mongoose   = require('mongoose');
 var port = process.env.PORT || 8080;
 var router = express.Router();
 
 /**
  *  Configuration ===============================================================
  */
-mongoose.connect('mongodb://Admin:FormerlyWhyhigh@ds043972.mongolab.com:43972/heroku_app37584629');
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,9 +19,6 @@ app.use('/api', router);
 /**
  *  Define model ================================================================
  */
-var Truck = require('./models/Truck');
-var User = require('./models/User');
-var Contact = require('./models/Contact');
 
 /**
  *  Routes ======================================================================
