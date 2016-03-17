@@ -50,7 +50,7 @@ angular.module('RadicalRatios.instructor', [
                 });
 
                 // A red platform for the other sprite to land on
-                var sprite2 = new Q.Sprite({ x: 500, y: 600, w: 300, h: 200 });
+                var sprite2 = new Q.Sprite({ x: 400, y: 200, w: 150, h: 100 });
                 sprite2.draw= function(ctx) {
                     ctx.fillStyle = '#FF0000';
                     ctx.fillRect(-this.p.cx,-this.p.cy,this.p.w,this.p.h);
@@ -79,6 +79,11 @@ angular.module('RadicalRatios.instructor', [
                 });
 
                 Q.input.on('action',stage,function(e) {
+                    sprite1.p.x = 500;
+                    sprite1.p.y = 100;
+                });
+
+                Q.input.on('space',stage,function(e) {
                     sprite1.p.x = 500;
                     sprite1.p.y = 100;
                 });
