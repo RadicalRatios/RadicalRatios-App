@@ -3,7 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('TrukSpot', ['ngRoute', 'ngResource', 'myApp.version',
     'TrukSpot.home','TrukSpot.about', 'TrukSpot.user', 'TrukSpot.myTruck',
-    'TrukSpot.services', 'TrukSpot.about.test', 'Quintus'
+    'TrukSpot.services', 'TrukSpot.about.test', 'Quintus', 'TrukSpot.about.template'
 ])
     /**
      *  Non-authed routes:
@@ -22,6 +22,17 @@ angular.module('TrukSpot', ['ngRoute', 'ngResource', 'myApp.version',
             controller: 'InstructorController'
         });
     }])
+
+    .config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/about/pageTemplate', {
+            templateUrl: 'pageTemplate/templates/pageTemplate.html',
+            controller: 'PageTemplateController'
+        });
+    }])
+
+    //.config(function(QProvider) {
+    //    QProvider.include("Sprites, Scenes, 2D, Input").setup({ width: 800, height: 400 });
+    //})
 
 
     /* TODO: Enable when the app goes v1 */

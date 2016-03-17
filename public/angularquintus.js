@@ -1,5 +1,5 @@
 (function (){
-    var app = angular.module('Quintus',[])
+    angular.module('Quintus',[])
         .provider('Q', function(){
 
             var instance = Quintus({audioSupported: ['mp3','wav']});
