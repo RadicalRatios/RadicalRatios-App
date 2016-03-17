@@ -1,17 +1,17 @@
 'use strict';
 
-angular.module('TrukSpot.about.test', [
+angular.module('RadicalRatios.instructor', [
     'ngRoute',
     'Quintus'
     ])
-    .controller('InstructorController', [function() {
+    .controller('InstructorController', [ '$window', function($window) {
 
-        window.addEventListener('load',function(e) {
+        $window.addEventListener('load',function(e) {
 
 
             // Set up a standard Quintus instance with only the
             // Sprites and Scene module (for the stage support) loaded.
-            var Q = window.Q = Quintus().include("Sprites, Scenes, 2D, Input")
+            var Q = $window.Q = Quintus().include("Sprites, Scenes, 2D, Input")
                 .setup({ width: 800, height: 400 });
 
             // Draw vertical lines at every 100 pixels for visual indicators
@@ -88,7 +88,7 @@ angular.module('TrukSpot.about.test', [
                 stage.on('postrender',drawLines);
             });
 
-            Q.load('enemy.png',function() {
+            Q.load('/images/enemy.png',function() {
 
                 // Start the show
                 Q.stageScene("start");

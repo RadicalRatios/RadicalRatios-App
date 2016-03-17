@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('TrukSpot.about.template', ['ngRoute'])
+angular.module('RadicalRatios.template', ['ngRoute'])
 
     .controller('PageTemplateController',['$scope', function($scope){
         $scope.name = "Brian";

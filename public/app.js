@@ -3,7 +3,8 @@
 // Declare app level module which depends on views, and components
 angular.module('TrukSpot', ['ngRoute', 'ngResource', 'myApp.version',
     'TrukSpot.home','TrukSpot.about', 'TrukSpot.user', 'TrukSpot.myTruck',
-    'TrukSpot.services', 'TrukSpot.about.test', 'Quintus', 'TrukSpot.about.template'
+    'TrukSpot.services', 'RadicalRatios.instructor', 'Quintus', 'RadicalRatios.template',
+    'RadicalRatios.game'
 ])
     /**
      *  Non-authed routes:
@@ -17,16 +18,23 @@ angular.module('TrukSpot', ['ngRoute', 'ngResource', 'myApp.version',
     }])
 
     .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/about/test', {
+        $routeProvider.when('/instructor', {
             templateUrl: 'instructor/templates/instructor.html',
             controller: 'InstructorController'
         });
     }])
 
     .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/about/pageTemplate', {
+        $routeProvider.when('/pageTemplate', {
             templateUrl: 'pageTemplate/templates/pageTemplate.html',
             controller: 'PageTemplateController'
+        });
+    }])
+
+    .config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/game', {
+            templateUrl: 'game/templates/game.html',
+            controller: 'GameController'
         });
     }])
 
