@@ -23,6 +23,10 @@
 
 }
 
+.btn{
+    width: 240px;
+}
+
 .btn:hover, .btn-large:hover {
     background-color: #0ea79c;
 }
