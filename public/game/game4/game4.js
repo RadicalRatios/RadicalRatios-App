@@ -4,17 +4,15 @@ angular.module('RadicalRatios.game.game4', ['ngRoute', 'Quintus'])
 
     .controller('Game4Controller',[ '$window', '$scope', '$location', function($window, $scope, $location) {
 
-        $scope.clearStages = function(){
-            Q.clearStages()
-        }
+        $scope.$on("$destroy", function(){
+            if (Q) {
+                Q.clearStages();
+            }
+        });
 
-        $scope.navBack = function(){
-            $location.path( "/game" );
-        }
+        $scope.init = function() {
 
-        $window.addEventListener('load',function(e) {
-
-
+            console.log('window load');
             // Set up a standard Quintus instance with only the
             // Sprites and Scene module (for the stage support) loaded.
             var Q = $window.Q = Quintus().include("Sprites, Scenes, 2D, Input")
@@ -113,7 +111,16 @@ angular.module('RadicalRatios.game.game4', ['ngRoute', 'Quintus'])
             });
 
 
-        });
+        };
+
+        $scope.clearStages = function(){
+            Q.clearStages();
+        };
+
+        $scope.navBack = function(){
+            $location.path( "/game" );
+        };
+
     }]);
 
 

@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('RadicalRatios', ['ngRoute', 'ngResource', 'myApp.version',
+angular.module('RadicalRatios', ['ngRoute', 'ngResource', 'ui.bootstrap', 'myApp.version',
     'RadicalRatios.home', 'RadicalRatios.instructor', 'Quintus', 'RadicalRatios.template',
     'RadicalRatios.game','RadicalRatios.game.game3','RadicalRatios.game.game4', 'RadicalRatios.game.options',
     'RadicalRatios.game.options.linkSession'
