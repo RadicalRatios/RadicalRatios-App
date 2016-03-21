@@ -19,17 +19,6 @@ angular.module('RadicalRatios.game.game4', ['ngRoute', 'Quintus'])
                 .setup({ width: 800, height: 400 });
 
             // Draw vertical lines at every 100 pixels for visual indicators
-            function drawLines(ctx) {
-                ctx.save();
-                ctx.strokeStyle = '#FFFFFF';
-                for(var x = 0;x < 1000;x+=100) {
-                    ctx.beginPath();
-                    ctx.moveTo(x,0);
-                    ctx.lineTo(x,600);
-                    ctx.stroke();
-                }
-                ctx.restore();
-            }
 
             // Create a simple scene that adds two shapes on the page
             Q.scene("start",function(stage) {
@@ -54,12 +43,19 @@ angular.module('RadicalRatios.game.game4', ['ngRoute', 'Quintus'])
                 });
 
                 // A red platform for the other sprite to land on
-                var sprite2 = new Q.Sprite({ x: 400, y: 200, w: 150, h: 100 });
+                var sprite2 = new Q.Sprite({ x: 400, y: 300, w: 600, h: 50 });
                 sprite2.draw= function(ctx) {
                     ctx.fillStyle = '#FF0000';
                     ctx.fillRect(-this.p.cx,-this.p.cy,this.p.w,this.p.h);
                 };
                 stage.insert(sprite2);
+
+                var sprite3 = new Q.Sprite({ x: 600, y: 200, w: 100, h: 100 });
+                sprite3.draw= function(ctx) {
+                    ctx.fillStyle = '#FF0000';
+                    ctx.fillRect(-this.p.cx,-this.p.cy,this.p.w,this.p.h);
+                };
+                stage.insert(sprite3);
 
                 // Bind the basic inputs to different behaviors of sprite1
                 Q.input.on('up',stage,function(e) {
@@ -71,11 +67,11 @@ angular.module('RadicalRatios.game.game4', ['ngRoute', 'Quintus'])
                 });
 
                 Q.input.on('left',stage,function(e) {
-                    sprite1.p.angle -= 5;
+                    sprite1.p.vx += -70;
                 });
 
                 Q.input.on('right',stage,function(e) {
-                    sprite1.p.angle += 5;
+                    sprite1.p.vx += 70;
                 });
 
                 Q.input.on('fire',stage,function(e) {
@@ -92,9 +88,6 @@ angular.module('RadicalRatios.game.game4', ['ngRoute', 'Quintus'])
                     sprite1.p.y = 100;
                 });
 
-
-                // Draw some lines after each frame
-                stage.on('postrender',drawLines);
             });
 
             Q.load('/images/enemy.png',function() {
@@ -104,7 +97,7 @@ angular.module('RadicalRatios.game.game4', ['ngRoute', 'Quintus'])
 
                 // Turn visual debugging on to see the
                 // bounding boxes and collision shapes
-                Q.debug = true;
+                Q.debug = false;
 
                 // Turn on default keyboard controls
                 Q.input.keyboardControls();
