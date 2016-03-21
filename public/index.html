@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="TrukSpot" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="TrukSpot" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="TrukSpot" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="TrukSpot" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html lang="en" ng-app="RadicalRatios" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="RadicalRatios" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="RadicalRatios" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="RadicalRatios" class="no-js"> <!--<![endif]-->
 <head>
     <script src='quintus-all.js'></script>
     <base href="/">
@@ -13,7 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
     <!--Import materialize.css and style sheet-->
     <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
@@ -34,9 +33,6 @@
     <!-- Load these here, because I don't wana use Gulp right now ;) -->
     <script src="app.js"></script>
     <script src="home/home.js"></script>
-    <script src="about/about.js"></script>
-    <script src="user/user.js"></script>
-    <script src="myTruck/myTruck.js"></script>
     <script src="components/version/version.js"></script>
     <script src="components/version/version-directive.js"></script>
     <script src="instructor/instructor.js"></script>
@@ -53,16 +49,6 @@
 
     <nav class="truk-dark-green waves-effect" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" style="z-index: 10;" href="#/about" class="header-link brand-logo lobsterize">Radical Ratios</a>
-            <!-- TODO: Enable when the app goes v1-->
-            <!--<ul class="right hide-on-med-and-down">-->
-                <!--<li><a class="header-link" href="#/login">Login</a></li>-->
-                <!--<li><a class="header-link" href="#/my-truck"><i class="mdi-maps-local-shipping left"></i>My Truk</a></li>-->
-            <!--</ul>-->
-
-            <!--<ul id="nav-mobile" class="side-nav" style="left: -250px;">-->
-                <!--<li><a class="header-link" href="#/login">Login</a></li>-->
-            <!--</ul>-->
-            <!--<a data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>-->
         </div>
     </nav>
 
@@ -73,9 +59,6 @@
         <div ng-view></div>
     </div>
     <div class="hiddendiv common"></div><div class="drag-target" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
-    <!-- In production use:
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-    -->
     <script src="components/version/interpolate-filter.js"></script>
 </body>
 </html>
