@@ -4,7 +4,7 @@
 angular.module('RadicalRatios', ['ngRoute', 'ngResource', 'ui.bootstrap', 'myApp.version',
     'RadicalRatios.home', 'RadicalRatios.instructor', 'Quintus', 'RadicalRatios.template',
     'RadicalRatios.game','RadicalRatios.game.game3','RadicalRatios.game.game4', 'RadicalRatios.game.options',
-    'RadicalRatios.game.options.linkSession'
+    'RadicalRatios.game.options.linkSession','RadicalRatios.game.game1','RadicalRatios.game.game2'
 ])
     /**
      *  Non-authed routes:
@@ -34,6 +34,20 @@ angular.module('RadicalRatios', ['ngRoute', 'ngResource', 'ui.bootstrap', 'myApp
         $routeProvider.when('/game', {
             templateUrl: 'game/templates/game.html',
             controller: 'GameController'
+        });
+    }])
+
+    .config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/game/game1', {
+            templateUrl: 'game/game1/templates/game1.html',
+            controller: 'Game1Controller'
+        });
+    }])
+
+    .config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/game/game2', {
+            templateUrl: 'game/game2/templates/game2.html',
+            controller: 'Game2Controller'
         });
     }])
 
