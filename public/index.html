@@ -48,19 +48,23 @@
 
 </head>
 <body>
-    <div class="corner-ribbon sticky z-depth-2">Beta</div>
+<div style="background-image: url('/images/testgif.gif');
+                    background-size: 100% 100%;
+                    background-repeat: no-repeat;
+                    height:100vh;">
+    <!--<div class="corner-ribbon sticky z-depth-2">Beta</div>-->
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand text-center" href="#">RadicalRatios</a>
-        </div>
-      </div>
-    </nav>
+    <!--<nav class="navbar navbar-inverse navbar-fixed-top">-->
+      <!--<div class="container">-->
+        <!--<div class="navbar-header">-->
+          <!--<a class="navbar-brand text-center" href="#">RadicalRatios</a>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</nav>-->
 
-    <div class="container">
-
+    <div class="container" style="padding-top: 85px;">
         <div ng-view></div>
+
         <div class="hiddendiv common"></div><div class="drag-target" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
         <script src="components/version/interpolate-filter.js"></script>
 
@@ -70,6 +74,7 @@
         <!--[if lt IE 8]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+    </div>
     </div>
 </body>
 </html>
