@@ -1,41 +1,40 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <div class="row">
-            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">
-                <h5>{{name}}</h5>
-            </div>
-        </div>
 
-        <div class="alert alert-warning alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Warning!</strong> Better check yourself, you're not looking too good.
+        <div class="row ">
+            <div class="alert alert-success alert-dismissible" role="alert" ng-show="keyMade">
+                <h3>
+                    <strong>Success!</strong> You've generated an instructor session.
+                    <span class="label label-primary"><strong>{{instructorName}}'s Key: {{sessionKey}}</strong></span>
+                </h3>
+            </div>
         </div>
 
         <form class="form-horizontal">
             <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
+                <label for="inputName" class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="inputPassword3" placeholder="Name">
+                    <input class="form-control" id="inputName" placeholder="Name" ng-model="instructorName">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="instructorEmail">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password" ng-model="instructorPassword">
                 </div>
             </div>
         </form>
 
         <div class="row row-space">
             <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">
-                <a class="btn btn-success btn-block" ng-click="navBack()">
+                <a class="btn btn-success btn-block"  ng-disabled="buttonDisabled" ng-click="generateKey()">
                     Generate Key
                 </a>
             </div>
