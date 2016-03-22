@@ -1,16 +1,53 @@
-<div class="jumbo-banner-green no-pad-bot">
-    <div class="container">
-        <div class="section center-align no-pad-top">
-            <h5 class="flow-text no-pad-bot" style="color: white; font-weight: 300; margin-bottom: 0;" >{{name}}</h5>
 
-            <div style="padding: 20px 0px 0px 0px;">
-                <a class="waves-effect waves-light btn truk-red" ng-click="navBack()">
-                    Back<i class="right"></i>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">
+                <h5>{{name}}</h5>
+            </div>
+        </div>
+
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Warning!</strong> Better check yourself, you're not looking too good.
+        </div>
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputPassword3" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                </div>
+            </div>
+        </form>
+
+        <div class="row row-space">
+            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">
+                <a class="btn btn-success btn-block" ng-click="navBack()">
+                    Generate Key
                 </a>
             </div>
+        </div>
 
+        <div class="row row-space">
+            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">
+                <a class="btn btn-primary btn-block" ng-click="navBack()">
+                    Back
+                </a>
+            </div>
         </div>
     </div>
 </div>
-
 
