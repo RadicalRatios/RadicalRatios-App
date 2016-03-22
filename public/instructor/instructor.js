@@ -7,6 +7,7 @@ angular.module('RadicalRatios.instructor', [
 
         $scope.sessionKey = null;
         $scope.instructorName = null;
+        $scope.instructorNameDisplay = null;
         $scope.instructorEmail = null;
         $scope.instructorPassword = null;
         $scope.keyMade = false;
@@ -17,18 +18,24 @@ angular.module('RadicalRatios.instructor', [
         }
 
         $scope.generateKey = function(){
-                if(isEmpty($scope.instructorName) || isEmpty($scope.instructorEmail) || isEmpty($scope.instructorPassword)){
-                    $scope.inputError = true;
-                }
-                else {
-                    $scope.sessionKey = generateID();
-                    $scope.inputError = false;
-                    $scope.keyMade = true;
+            if(isEmpty($scope.instructorName) || isEmpty($scope.instructorEmail) || isEmpty($scope.instructorPassword)){
+                $scope.keyMade = false;
+                $scope.inputError = true;
+            }
+            else {
+                $scope.instructorNameDisplay = $scope.instructorName;
+                $scope.sessionKey = generateID();
+                $scope.inputError = false;
+                $scope.keyMade = true;
 
-                    $scope.instructorName = null;
-                    $scope.instructorEmail = null;
-                    $scope.instructorPassword = null;
-                }
+                $scope.clearInputs();
+            }
+        }
+
+        $scope.clearInputs = function(){
+            $scope.instructorName = null;
+            $scope.instructorEmail = null;
+            $scope.instructorPassword = null;
         }
 
         $scope.navBack = function(){
