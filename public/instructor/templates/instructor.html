@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-sm-12">
 
-        <div class="row ">
+        <div class="row" style="height: 75px;">
             <div class="alert alert-success alert-dismissible" role="alert" ng-show="keyMade">
                 <h3>
                     <strong>Success!</strong> You've generated an instructor session.
@@ -11,7 +11,9 @@
             </div>
         </div>
 
-        <div class="row ">
+        <div class="row" style="height: 75px;
+                                top: -75px;
+                                position: relative;">
             <div class="alert alert-danger alert-dismissible" role="alert" ng-show="inputError">
                 <h3>
                     <strong>Try Again!</strong> You must fill all fields to start a session.
@@ -19,7 +21,7 @@
             </div>
         </div>
 
-        <form class="form-horizontal col-sm-12" name="instructorInputForm">
+        <form class="form-horizontal col-sm-12" name="instructorInputForm" style="padding-top:30px;">
             <div class="form-group">
                 <div class="col-sm-6">
                     <input class="form-control col-sm-offset-6" id="inputName" placeholder="Name"
