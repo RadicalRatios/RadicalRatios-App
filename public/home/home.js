@@ -1,9 +1,11 @@
 'use strict';
 
-angular.module('RadicalRatios.home', ['ngRoute'])
+angular.module('RadicalRatios.home', ['ngRoute', 'ngAudio'])
 
-    .controller('HomeController',['$scope', '$location', function($scope, $location){
+    .controller('HomeController',['$scope', '$location', 'ngAudio', function($scope, $location, ngAudio){
         $scope.name = "Welcome to Radical Ratios!";
+
+        $scope.audio = ngAudio.load('sound/SleepAway.mp3');
 
         $scope.navToInstructor = function(){
             $location.path( "/instructor" );
