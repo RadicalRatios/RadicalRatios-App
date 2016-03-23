@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('RadicalRatios.navBar', ['ngRoute'])
+angular.module('RadicalRatios.navBar', ['ngRoute', 'ngAudio'])
     .directive('navBar', function() {
     return {
         scope: true,  // use a child scope that inherits from parent
@@ -10,19 +10,21 @@ angular.module('RadicalRatios.navBar', ['ngRoute'])
         templateUrl: '/navbar/template/navbar.html'
         };
     })
-    .controller('navBarController',['$scope', '$uibModal', function($scope, $uibModal){
+    .controller('navBarController',['$scope', '$uibModal', 'ngAudio', function($scope, $uibModal, ngAudio){
 
-    $scope.optionsModal = function(){
-        var modalInstance = $uibModal.open({
-            templateUrl: '/instructor/templates/instructor.html',
-            controller: 'InstructorController',
-            size: 'lg',
-            resolve: {
-                items: function () {
-                    return $scope.items;
+        $scope.audio = ngAudio.load('sound/SleepAway.mp3');
+
+        $scope.optionsModal = function(){
+            var modalInstance = $uibModal.open({
+                templateUrl: '/instructor/templates/instructor.html',
+                controller: 'InstructorController',
+                size: 'lg',
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
                 }
-            }
-        });
-    }
+            });
+        }
 
     }]);
