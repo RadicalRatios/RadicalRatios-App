@@ -1,15 +1,18 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" ng-init="audio.play()">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="#" style=" font-size: 38px;font-family: lobster; color:black;">Radical Ratios</a></li>
-                <li><button ng-click='audio.paused ? audio.play() : audio.pause()'>Play</button></li>
-                <li><button ng-click='audio.muting = !audio.muting'>Mute</button></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a><span
+                        ng-class="audio.muting? 'glyphicon glyphicon-volume-up' : 'glyphicon glyphicon-volume-off'"
+                        ng-click='audio.muting = !audio.muting'></span></a></li>
+                <li><a><input class='form-control' type=range min=0 max=1 step=0.01 ng-model='audio.volume' style="height:25px;"></a></li>
                 <li><a><span class="glyphicon glyphicon-cog" ng-click="optionsModal()"></span></a></li>
-                <li>Volume <input class='form-control' type=range min=0 max=1 step=0.01 ng-model='audio.volume'></li>
             </ul>
         </div>
     </div>
 </nav>
+
+
