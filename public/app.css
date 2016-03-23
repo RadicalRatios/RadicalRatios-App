@@ -1,4 +1,8 @@
 /* RadicalRatios Branding */
+.navbar {
+    min-height: 32px;
+}
+
 .navbar-header {
     float: left;
     padding: 15px;
@@ -9,6 +13,11 @@
     color: #fff !important;
     font-size: 35px !important;
     float:none;
+}
+
+.navbar-nav>li>a {
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 body {
