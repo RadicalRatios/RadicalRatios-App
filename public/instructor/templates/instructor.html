@@ -1,70 +1,66 @@
-
-<div class="row">
-    <div class="col-sm-12">
-
-        <div class="row" style="height: 75px;">
-            <div class="alert alert-success alert-dismissible" role="alert" ng-show="keyMade">
-                <h3>
-                    <strong>Success!</strong> You've generated an instructor session.
-                    <span class="label label-primary"><strong>{{instructorNameDisplay}}'s Key: {{sessionKey}}</strong></span>
-                </h3>
-            </div>
-        </div>
-
-        <div class="row" style="height: 75px;
-                                top: -75px;
-                                position: relative;">
-            <div class="alert alert-danger alert-dismissible" role="alert" ng-show="inputError">
-                <h3>
-                    <strong>Try Again!</strong> You must fill all fields to start a session.
-                </h3>
-            </div>
-        </div>
-
-        <form class="form-horizontal col-sm-12" name="instructorInputForm" style="padding-top:30px;">
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <input class="form-control col-sm-offset-6" id="inputName" placeholder="Name"
-                           ng-model="instructorName" >
+<div class="modal-header">
+    <div class="btn-group" style="width:100%;">
+        <label style="width:33%; "class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Left'"uncheckable>Game</label>
+        <label style="width:33%; "class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Middle'"uncheckable>Student</label>
+        <label style="width:33%;" class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Right'"uncheckable>Instructor</label>
+    </div>
+</div>
+<div class="modal-body">
+    <div ng-show="radioModel === 'Right'">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row" style="height: 75px;">
+                    <div     ng-class="inputError? 'alert alert-danger' : 'alert alert-success'"
+                             role="alert" ng-show="keyGenerate">
+                        <h4>
+                            <strong>Success!</strong> You've created a session.
+                            <span class="label label-primary"><strong>{{instructorNameDisplay}}'s Key: {{sessionKey}}</strong></span>
+                        </h4>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <input type="email" class="form-control col-sm-offset-6" id="inputEmail3" placeholder="Email"
-                           ng-model="instructorEmail" >
+                <form class="form-horizontal col-sm-12" name="instructorInputForm" >
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input class="form-control" id="inputName" placeholder="Name"
+                                   ng-model="instructorName" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email"
+                                   ng-model="instructorEmail" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password"
+                                   ng-model="instructorPassword" >
+                        </div>
+                    </div>
+                </form>
+                <div class=" row-space col-sm-12">
+                    <div class=" col-sm-6">
+                        <a class="btn btn-success btn-block"
+                           ng-click="clearInputs()">
+                            Clear
+                        </a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a class="btn btn-success btn-block"
+                           ng-click="generateKey()">
+                            Generate Key
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <input type="password" class="form-control col-sm-offset-6" id="inputPassword3" placeholder="Password"
-                           ng-model="instructorPassword" >
-                </div>
-            </div>
-        </form>
-
-
-        <div class="row row-space col-sm-12">
-            <div class="col-sm-offset-3 col-sm-3">
-                <a class="btn btn-success btn-block"
-                   ng-click="clearInputs()">
-                    Clear
-                </a>
-            </div>
-            <div class="col-sm-3">
-                <a class="btn btn-success btn-block"
-                   ng-click="generateKey()">
-                    Generate Key
-                </a>
-            </div>
-        </div>
-
-        <div class="row row-space col-sm-12">
-            <div class="col-sm-offset-3 col-sm-6">
-                <a class="btn btn-primary btn-block" ng-click="navBack()">
-                    Back
-                </a>
             </div>
         </div>
     </div>
 </div>
-
+<div class="modal-footer">
+    <div class=" col-sm-12">
+        <a class="btn btn-primary btn-block"
+           ng-click="$dismiss()">
+            Close
+        </a>
+    </div>
+</div>

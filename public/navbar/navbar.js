@@ -13,12 +13,13 @@ angular.module('RadicalRatios.navBar', ['ngRoute', 'ngAudio'])
     .controller('navBarController',['$scope', '$uibModal', 'ngAudio', function($scope, $uibModal, ngAudio){
 
         $scope.audio = ngAudio.load('sound/SleepAway.mp3');
+        $scope.audio.volume = 0;
 
         $scope.optionsModal = function(){
             var modalInstance = $uibModal.open({
                 templateUrl: '/instructor/templates/instructor.html',
                 controller: 'InstructorController',
-                size: 'lg',
+                size: 'md',
                 resolve: {
                     items: function () {
                         return $scope.items;
