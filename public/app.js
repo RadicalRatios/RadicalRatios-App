@@ -59,19 +59,6 @@ angular.module('RadicalRatios', ['ngRoute', 'ngResource', 'ui.bootstrap', 'myApp
         });
     }])
 
-    .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/game/options', {
-            templateUrl: 'game/options/templates/options.html',
-            controller: 'OptionsController'
-        });
-    }])
-
-    .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/game/options/linkSession', {
-            templateUrl: 'game/options/linkSession/templates/linkSession.html',
-            controller: 'LinkSessionController'
-        });
-    }])
 
     //.config(function(QProvider) {
     //    QProvider.include("Sprites, Scenes, 2D, Input").setup({ width: 800, height: 400 });

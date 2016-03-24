@@ -21,9 +21,6 @@ angular.module('RadicalRatios.game', ['ngRoute'])
             $location.path( "/game/game4" );
         }
 
-        $scope.navToOptions = function(){
-            $location.path( "/game/options" );
-        }
 
         $scope.navBack = function(){
             $location.path( "/home" );
