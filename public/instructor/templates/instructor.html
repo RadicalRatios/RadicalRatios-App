@@ -13,8 +13,8 @@
                     <div     ng-class="inputError? 'alert alert-danger' : 'alert alert-success'"
                              role="alert" ng-show="keyGenerate">
                         <h4>
-                            <strong>Success!</strong> You've created a session.
-                            <span class="label label-primary"><strong>{{instructorNameDisplay}}'s Key: {{sessionKey}}</strong></span>
+                            <strong>{{messages.first}}</strong> {{messages.second}}
+                            <span ng-show="!inputError" class="label label-primary"><strong>{{instructorNameDisplay}}'s Key: {{sessionKey}}</strong></span>
                         </h4>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                 <div class=" row-space col-sm-12">
                     <div class=" col-sm-6">
                         <a class="btn btn-success btn-block"
-                           ng-click="clearInputs()">
+                           ng-click="clearAll()">
                             Clear
                         </a>
                     </div>
