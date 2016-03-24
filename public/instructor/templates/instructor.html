@@ -9,9 +9,9 @@
     <div ng-show="radioModel === 'Right'">
         <div class="row">
             <div class="col-sm-12">
-                <div class="row" style="height: 75px;">
+                <div class="row" style="height: 75px;" ng-show="keyGenerate">
                     <div     ng-class="inputError? 'alert alert-danger' : 'alert alert-success'"
-                             role="alert" ng-show="keyGenerate">
+                             role="alert" >
                         <h4>
                             <strong>{{messages.first}}</strong> {{messages.second}}
                             <span ng-show="!inputError" class="label label-primary"><strong>{{instructorNameDisplay}}'s Key: {{sessionKey}}</strong></span>

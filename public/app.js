@@ -18,13 +18,6 @@ angular.module('RadicalRatios', ['ngRoute', 'ngResource', 'ui.bootstrap', 'myApp
     }])
 
     .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/instructor', {
-            templateUrl: 'instructor/templates/instructor.html',
-            controller: 'InstructorController'
-        });
-    }])
-
-    .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/pageTemplate', {
             templateUrl: 'pageTemplate/templates/pageTemplate.html',
             controller: 'PageTemplateController'
