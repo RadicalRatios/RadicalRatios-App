@@ -1,0 +1,55 @@
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="row" style="height: 75px;">
+            <div class="alert alert-success alert-dismissible" role="alert" ng-show="keyLinked">
+                <h3>
+                    <strong>Success!</strong> You've linked to an instructor session.
+                </h3>
+            </div>
+        </div>
+
+        <div class="row" style="height: 75px;
+                                top: -75px;
+                                position: relative;">
+            <div class="alert alert-danger alert-dismissible" role="alert" ng-show="inputError">
+                <h3>
+                    <strong>Try Again!</strong> You must fill all fields to link to an instructor session.
+                </h3>
+            </div>
+        </div>
+
+        <form class="form-horizontal col-sm-12" name="instructorInputForm" style="padding-top:30px;">
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <input class="form-control col-sm-offset-6" id="inputName" placeholder="Name"
+                           ng-model="studentName" >
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <input class="form-control col-sm-offset-6" id="inputKey" placeholder="Instructor Key"
+                           ng-model="instructorKey" >
+                </div>
+            </div>
+        </form>
+
+
+        <div class="row row-space col-sm-12">
+            <div class="col-sm-offset-3 col-sm-3">
+                <a class="btn btn-success btn-block"
+                   ng-click="clearInputs()">
+                    Clear
+                </a>
+            </div>
+            <div class="col-sm-3">
+                <a class="btn btn-success btn-block"
+                   ng-click="linkKey()">
+                    Link Key
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

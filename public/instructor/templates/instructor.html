@@ -1,0 +1,66 @@
+<div class="modal-header">
+    <div class="btn-group" style="width:100%;">
+        <label style="width:33%; "class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Left'"uncheckable>Game</label>
+        <label style="width:33%; "class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Middle'"uncheckable>Student</label>
+        <label style="width:33%;" class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Right'"uncheckable>Instructor</label>
+    </div>
+</div>
+<div class="modal-body">
+    <div ng-show="radioModel === 'Right'">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row" style="height: 75px;" ng-show="keyGenerate">
+                    <div     ng-class="inputError? 'alert alert-danger' : 'alert alert-success'"
+                             role="alert" >
+                        <h4>
+                            <strong>{{messages.first}}</strong> {{messages.second}}
+                            <span ng-show="!inputError" class="label label-primary"><strong>{{instructorNameDisplay}}'s Key: {{sessionKey}}</strong></span>
+                        </h4>
+                    </div>
+                </div>
+                <form class="form-horizontal col-sm-12" name="instructorInputForm" >
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input class="form-control" id="inputName" placeholder="Name"
+                                   ng-model="instructorName" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email"
+                                   ng-model="instructorEmail" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password"
+                                   ng-model="instructorPassword" >
+                        </div>
+                    </div>
+                </form>
+                <div class=" row-space col-sm-12">
+                    <div class=" col-sm-6">
+                        <a class="btn btn-success btn-block"
+                           ng-click="clearAll()">
+                            Clear
+                        </a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a class="btn btn-success btn-block"
+                           ng-click="generateKey()">
+                            Generate Key
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class=" col-sm-12">
+        <a class="btn btn-primary btn-block"
+           ng-click="$dismiss()">
+            Close
+        </a>
+    </div>
+</div>

@@ -1,34 +1,35 @@
-/* TrukSpot Branding */
-
-.truk-red {
-    background: #d4274e;
-}
-.truk-light-grey {
-    background: #c1c1c1;
-}
-.truk-grey {
-    background: #9a9a9a;
-}
-.truk-light-green {
-    background: #78f4b9;
-}
-.truk-green {
-    background: #27d4ad;
-}
-.truk-dark-green {
-    background: #0ea79c;
+/* RadicalRatios Branding */
+.navbar {
+    min-height: 32px;
 }
 
-.brand-logo {
-
+.navbar-header {
+    float: left;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+}
+.navbar-brand {
+    color: #fff !important;
+    font-size: 35px !important;
+    float:none;
 }
 
-.btn:hover, .btn-large:hover {
-    background-color: #0ea79c;
+.navbar-nav>li>a {
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-.input-field .prefix.active {
-    color: #0ea79c;
+body {
+ /* padding-top: 85px; // subject to change*/
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.row-space {
+    margin-top: 15px;
 }
 
 /* Fonts */
@@ -47,12 +48,6 @@
     text-decoration: none;
 }
 
-/* Header */
-
-.header-link:focus {
-    outline: 0;
-}
-
 /* Beta Banner */
 
 .corner-ribbon{
@@ -67,25 +62,22 @@
     color: #f0f0f0;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
-    z-index: 10;
+    z-index: 100000;
 }
 
 .corner-ribbon.sticky{
     position: absolute;
 }
 
-/* Home Page*/
+span.glyphicon-cog {
+    font-size: 1.5em;
+}
 
-.jumbo-banner-green {
-    height: 333px;
-    background-image: -ms-linear-gradient(left, #27D4AD 0%, #78F4B9 100%);
-    background-image: -moz-linear-gradient(left, #27D4AD 0%, #78F4B9 100%);
-    background-image: -o-linear-gradient(left, #27D4AD 0%, #78F4B9 100%);
-    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #27D4AD), color-stop(1, #78F4B9));
-    background-image: -webkit-linear-gradient(left, #27D4AD 0%, #78F4B9 100%);
-    background-image: linear-gradient(to right, #27D4AD 0%, #78F4B9 100%);
+span.glyphicon-volume-up {
+    font-size: 1.5em;
 }
-.jumbo-banner-icon {
-    height: 150px;
-    width: 150px;
+
+span.glyphicon-volume-off {
+    font-size: 1.5em;
 }
+
