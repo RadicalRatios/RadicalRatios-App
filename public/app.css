@@ -92,3 +92,7 @@ span.glyphicon-remove {
 .progress-bar {
     width: 10%;
 }
+
+.navbar {
+     border-radius: 0px;
+}

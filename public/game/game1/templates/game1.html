@@ -53,49 +53,33 @@
         </style>
     </head>
     <div class="col-sm-12">
-        <div id="question" class="well">
-            <h1 style="text-align:center;">The Ratio of Bananas to Oranges should be
-                <span class="label label-primary"><strong>{{dividend}}:{{divisor}}</strong></span></h1>
+        <div id="question" class="well" style="padding:0px;">
+            <h3 style="text-align:center; margin-top: 10px; margin-bottom: 10px;">The Ratio of Bananas to Oranges should be
+                <span class="label label-primary"><strong>{{dividend}}:{{divisor}}</strong></span></h3>
         </div>
 
         <div id="progressBar" class="progress" style="height: 22px;">
         </div>
 
-        <div id="answer" style="display:{{displayMode}};"><uib-alert type={{messageType}}><h3 style="text-align:center;">{{ansMessage}}</h3></uib-alert></div>
+        <div id="answer" style="display:{{displayMode}};"><uib-alert type={{messageType}}><h5 style="text-align:center;">{{ansMessage}}</h5></uib-alert></div>
         <div class="row row-space">
-            <div class="col-sm-2"><button class="btn btn-primary btn-block" id="subtractButton">-</button></div>
-            <div align="center" id="objectsDiv" class="col-sm-8">
+            <div align="center" id="objectsDiv">
                 <div id="object1Div" class="objectRow"></div>
                 <div id="object2Div" class="objectRow"></div>
             </div>
-            <div class="col-sm-2"><button class="btn btn-primary btn-block" id="addButton">+</button></div>
         </div>
     </div>
 </div>
-
-
-
-<div class="row space">
-    <div class="col-xs-12">
-        <div class="row row-space">
-            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">
-                <button class="btn btn-primary btn-block" id="submit" >Submit</button>
-            </div>
-        </div>
+<div class="row row-space col-sm-12">
+    <div class="col-sm-6">
+        <button class="btn btn-danger btn-block" id="subtractButton">Less Bananas!</button>
+        <a class="btn btn-primary btn-block" ng-click="navBack()">
+            Back
+        </a>
     </div>
-</div>
-
-
-
-<div class="row space">
-    <div class="col-xs-12">
-        <div class="row row-space">
-            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">
-                <a class="btn btn-primary btn-block" ng-click="navBack()">
-                    Back
-                </a>
-            </div>
-        </div>
+    <div class="col-sm-6">
+        <button class="btn btn-success btn-block" id="addButton">More Bananas!</button>
+        <button class="btn btn-primary btn-block" id="submit" >Submit</button>
     </div>
 </div>
 
