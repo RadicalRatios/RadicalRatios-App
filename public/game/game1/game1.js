@@ -2,9 +2,10 @@
 
 angular.module('RadicalRatios.game.game1', ['ngRoute'])
 
-    .controller('Game1Controller',['$scope','$location', function($scope, $location){
+    .controller('Game1Controller',['$scope','$location', 'ngAudio', function($scope, $location, ngAudio){
 
-
+        $scope.audio = ngAudio.load('sound/boopboop.wav');
+        $scope.audio.volume = 1;
 
         var dividend;
         var divisor;
@@ -40,6 +41,8 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
                 document.getElementById("object1Div").appendChild(x);
             else
                 document.getElementById("object2Div").appendChild(x);
+
+
         }
 
 
@@ -89,6 +92,7 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
             var n = getObject1Value();
             if (n < 36)
                 addObject("object1");
+            $scope.audio.play();
         }
 
         document.getElementById("subtractButton").onclick = function(){
