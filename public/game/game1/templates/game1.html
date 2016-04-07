@@ -1,29 +1,6 @@
 <div class="row">
     <head>
         <style>
-
-            #question{
-                padding-left: 10px;
-                position: relative;
-
-                font-size: xx-large;
-                background-color: lime;
-                width: 100%;
-                height: 54px;
-                border: 3px solid #73AD21;
-            }
-
-            #answer{
-
-                position: relativ;
-
-                font-size: large;
-                background-color: aqua;
-                width: 100%;
-                height: 30px;
-                border: 2px solid blue;
-            }
-
             .object1, .object2{
                 margin-left: 3px;
                 margin-right: 3px;
@@ -52,91 +29,44 @@
                 background-size: 100%;
             }
 
-
             @-webkit-keyframes example {
                 0%   {height: 0px; width: 0px;  }
-                70%  {height: 110px; width: 110px;}
+                70%  {height: 100px; width: 100px;}
                 80%  {height: 86px; width: 86px;}
                 90%  {height: 100px; width: 100px;}
             }
-
-
-
-
-            .objectRow{
-                display: inline-block;
-            }
-
-            #objectsDiv{
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-
-            #addButton, #subtractButton{
-                height: 60px;
-                width: 60px;
-                top: 40%;
-                position: fixed;
-            }
-
-            #addButton{
-                right: 15%;
-                position: absolute;
-            }
-
-            #subtractButton{
-                left: 15%;
-                position: absolute;
-            }
-
-            #submit{
-                position: absolute;
-                left: 50%;
-                bottom: 10px;
-                width: 84px;
-                height: 50px;
-                transform: translate(-50%, -50%);
-            }
-
-            #score{
-                position: absolute;
-                left: 10px;
-                bottom:0px;
-            }
-
         </style>
     </head>
-    <body>
-    <div align="center" id="question">
-
-
-    </div>
-    <div align="center" id="answer">
-    </div>
-    <div>
-
-    </div>
-    <button class="btn btn-primary btn-block" id="subtractButton">-</button>
-
-    <button class="btn btn-primary btn-block" id="addButton">+</button>
-    <div align="center" id="objectsDiv">
-        <div id="object1Div" class="objectRow"></div>
-        <br>
-        <div id="object2Div" class="objectRow"></div>
+    <div class="col-sm-12">
+        <div id="question" class="well"><h1 style="text-align:center;">{{dividend}}:{{divisor}}</h1></div>
+        <uib-progressbar type="success" max="max" value="questions"><span style="color:white; white-space:nowrap;">{{questions}} / {{max}}</span></uib-progressbar>
+        <div id="answer" style="display:{{displayMode}};"><uib-alert type={{messageType}}><h3 style="text-align:center;">{{ansMessage}}</h3></uib-alert></div>
+        <div class="row row-space">
+            <div class="col-sm-2"><button class="btn btn-primary btn-block" id="subtractButton">-</button></div>
+            <div align="center" id="objectsDiv" class="col-sm-8">
+                <div id="object1Div" class="objectRow"></div>
+                <div id="object2Div" class="objectRow"></div>
+            </div>
+            <div class="col-sm-2"><button class="btn btn-primary btn-block" id="addButton">+</button></div>
+        </div>
     </div>
 </div>
-<br>
-<button class="btn btn-primary btn-block" id="submit" >Submit</button>
-</body>
-<div id="score"></div>
 
 
+
+<div class="row space">
+    <div class="col-xs-12">
+        <div class="row row-space">
+            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">
+                <button class="btn btn-primary btn-block" id="submit" >Submit</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row space>
+
+
+<div class="row space">
     <div class="col-xs-12">
         <div class="row row-space">
             <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">

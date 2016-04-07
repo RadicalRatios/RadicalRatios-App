@@ -12,25 +12,25 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
         $scope.audio3.volume = 1;
         var audioFlag =0;
 
-        var dividend;
-        var divisor;
+        $scope.dividend;
+        $scope.divisor;
         var level = 1;
         var correct = 0;
-        var questions = 0;
+        $scope.questions = 0;
+        $scope.max = 10;
         var levelCount = 0;
         var ans = 0;
+        $scope.ansMessage;
+        $scope.messageType = "success"
+        $scope.displayMode = "none";
 
         function newProblem(){
-            questions++;
-            updateScore();
-            dividend = level + Math.round((Math.random() * 2+correct/3));
-            divisor  = Math.floor((Math.random() * 6)+1+level/2);
+            $scope.questions++;
+            $scope.dividend = level + Math.round((Math.random() * 2+correct/3));
+            $scope.divisor  = Math.floor((Math.random() * 6)+1+level/2);
 
-            var q = document.getElementById("question");
-
-            q.innerHTML = "" + dividend + ":" + divisor;
-            var q = document.getElementById("answer");
-            q.innerHTML = "";
+            $scope.ansMessage = "";
+            $scope.displayMode = "none";
 
             clearObjects();
             calculate();
@@ -72,22 +72,26 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
         b.onclick = function(){
             var o1 = getObject1Value();
 
-            var q = document.getElementById("answer");
-
             if (o1 == ans){
-                q.innerHTML = "Correct!";
+                $scope.displayMode = "";
+                $scope.ansMessage = "Correct!";
+                $scope.messageType = "success"
                 correct++;
                 levelCount++;
             }
-            else
-                q.innerHTML = "Incorrect (expected "+ans+")";
+            else {
+                $scope.displayMode = "";
+                $scope.ansMessage = "Incorrect (expected " + ans + ")";
+                $scope.messageType = "danger"
+
+            }
             disableButtons(true);
             //level up
             if (levelCount/2 >= level){
                 level++;
                 levelCount = 0;
             }
-            if (questions >= 10)
+            if ($scope.questions >= 10)
                 setTimeout(endGame, 3000);
             else
                 setTimeout(newProblem, 3000);
@@ -134,9 +138,9 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
         }
 
         function calculate(){
-            var m = gcm(dividend,divisor);
-            var a =  dividend / m;
-            var b =  divisor / m;
+            var m = gcm($scope.dividend,$scope.divisor);
+            var a =  $scope.dividend / m;
+            var b =  $scope.divisor / m;
 
 //determine problem difficulty
 
@@ -166,11 +170,6 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
             alert("Thanks for playing. You got " + correct + "/10 questions correct. Please submit your score.");
         }
 
-        function updateScore(){
-            var q = document.getElementById("score");
-            q.innerHTML = "question "+ questions + "/10";
-
-        }
         newProblem();
 
 //clearObjects();
