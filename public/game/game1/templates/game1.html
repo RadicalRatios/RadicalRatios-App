@@ -57,7 +57,10 @@
             <h1 style="text-align:center;">The Ratio of Bananas to Oranges should be
                 <span class="label label-primary"><strong>{{dividend}}:{{divisor}}</strong></span></h1>
         </div>
-        <uib-progressbar type="success" max="max" value="questions"><span style="color:white; white-space:nowrap;">{{questions}} / {{max}}</span></uib-progressbar>
+
+        <div id="progressBar" class="progress" style="height: 22px;">
+        </div>
+
         <div id="answer" style="display:{{displayMode}};"><uib-alert type={{messageType}}><h3 style="text-align:center;">{{ansMessage}}</h3></uib-alert></div>
         <div class="row row-space">
             <div class="col-sm-2"><button class="btn btn-primary btn-block" id="subtractButton">-</button></div>

@@ -36,16 +36,44 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
             calculate();
             newGame();
             disableButtons(false);
+            addObject("newQuestion");
+
         }
 
         function addObject(t){
             var x = document.createElement('div');
 
-            x.className=t;
-            if (t == "object1")
+            if (t == "object1") {
+                x.className = t;
                 document.getElementById("object1Div").appendChild(x);
-            else
+            }
+            else if (t == "object2") {
+                x.className = t;
                 document.getElementById("object2Div").appendChild(x);
+            }
+            else if (t == "correctAnswer"){
+                var bar = document.getElementById("progressBar")
+                bar.removeChild(bar.lastChild)
+                x.className="progress-bar progress-bar-success";
+                var y = document.createElement('span');
+                y.className="glyphicon glyphicon-ok";
+                x.appendChild(y);
+                bar.appendChild(x);
+            }
+            else if (t == "wrongAnswer"){
+                var bar = document.getElementById("progressBar")
+                bar.removeChild(bar.lastChild)
+                x.className="progress-bar progress-bar-danger";
+                var y = document.createElement('span');
+                y.className="glyphicon glyphicon-remove";
+                x.appendChild(y);
+                bar.appendChild(x);
+            }
+            else if (t == "newQuestion"){
+                var bar = document.getElementById("progressBar")
+                x.className="progress-bar progress-bar-striped progress-bar-info active ";
+                bar.appendChild(x);
+            }
 
 
         }
@@ -76,6 +104,7 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
                 $scope.displayMode = "";
                 $scope.ansMessage = "Correct!";
                 $scope.messageType = "success"
+                addObject("correctAnswer");
                 correct++;
                 levelCount++;
             }
@@ -83,6 +112,7 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
                 $scope.displayMode = "";
                 $scope.ansMessage = "Incorrect (expected " + ans + ")";
                 $scope.messageType = "danger"
+                addObject("wrongAnswer");
 
             }
             disableButtons(true);

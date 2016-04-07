@@ -81,3 +81,14 @@ span.glyphicon-volume-off {
     font-size: 1.5em;
 }
 
+span.glyphicon-ok {
+    font-size: 1.5em;
+}
+
+span.glyphicon-remove {
+    font-size: 1.5em;
+}
+
+.progress-bar {
+    width: 10%;
+}
