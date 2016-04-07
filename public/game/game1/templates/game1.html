@@ -15,26 +15,41 @@
                 background-image: url('/images/orange-icon.png');
                 background-repeat:no-repeat;
                 background-size: 100%;
+                -webkit-animation: example .2s, rolling 6s .2s infinite; /* Chrome, Safari, Opera */
+                -webkit-transition-timing-function: ease-in-out;
+                transform-origin: bottom;
 
             }
 
             .object1{
-                -webkit-animation-name: example; /* Chrome, Safari, Opera */
-                -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
-                animation-name: example;
-                animation-duration: .2s;
+                -webkit-animation: example .2s, swinging 4s .2s infinite; /* Chrome, Safari, Opera */
+                -webkit-transition-timing-function: ease-in-out;
                 position: relative;
                 background-image: url('/images/banana.png');
                 background-repeat:no-repeat;
                 background-size: 100%;
+                transform-origin: top;
             }
 
             @-webkit-keyframes example {
-                0%   {height: 0px; width: 0px;  }
-                70%  {height: 100px; width: 100px;}
-                80%  {height: 86px; width: 86px;}
-                90%  {height: 100px; width: 100px;}
+                0%   {-webkit-transform: scale(0);}
+                60%  {-webkit-transform: scale(1.1);}
+                80%  {-webkit-transform: scale(.9);}
+                100%  {-webkit-transform: scale(1);}
             }
+
+            @-webkit-keyframes swinging{
+                0%{-webkit-transform: rotate(0deg);}
+                50%{-webkit-transform: rotate(10deg)}
+                100%{-webkit-transform: rotate(0deg);}
+            }
+
+            @-webkit-keyframes rolling{
+                0%{-webkit-transform: scale(1);}
+                50%{-webkit-transform: scale(.95);}
+                100%{-webkit-transform: scale(1);}
+            }
+
         </style>
     </head>
     <div class="col-sm-12">
