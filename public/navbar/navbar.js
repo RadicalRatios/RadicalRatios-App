@@ -14,6 +14,7 @@ angular.module('RadicalRatios.navBar', ['ngRoute', 'ngAudio'])
 
         $scope.audio = ngAudio.load('sound/SleepAway.mp3');
         $scope.audio.volume = 0;
+        $scope.audio.loop = true;
 
         $scope.optionsModal = function(){
             var modalInstance = $uibModal.open({

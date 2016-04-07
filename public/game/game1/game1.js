@@ -6,6 +6,11 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
 
         $scope.audio = ngAudio.load('sound/boopboop.wav');
         $scope.audio.volume = 1;
+        $scope.audio2 = ngAudio.load('sound/boopboop.wav');
+        $scope.audio2.volume = 1;
+        $scope.audio3 = ngAudio.load('sound/boopboop.wav');
+        $scope.audio3.volume = 1;
+        var audioFlag =0;
 
         var dividend;
         var divisor;
@@ -92,7 +97,20 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
             var n = getObject1Value();
             if (n < 36)
                 addObject("object1");
-            $scope.audio.play();
+
+            if(audioFlag === 0) {
+                $scope.audio.play();
+                audioFlag = 1;
+            }
+            else if(audioFlag === 1){
+                $scope.audio2.play();
+                audioFlag = 2;
+            }
+            else{
+                $scope.audio3.play();
+                audioFlag = 0;
+            }
+
         }
 
         document.getElementById("subtractButton").onclick = function(){
