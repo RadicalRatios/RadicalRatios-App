@@ -166,7 +166,9 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
             var n = getObject1Value();
             if (n > 1){
                 if (x.hasChildNodes()) {
-                    x.removeChild(x.firstChild);
+                    x.lastChild.className = "object1delete";
+                    setTimeout(function() { x.removeChild(x.lastChild); }, 200);
+
                 }
             }
         }
