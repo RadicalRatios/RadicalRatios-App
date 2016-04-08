@@ -5,7 +5,7 @@ angular.module('RadicalRatios', ['ngRoute', 'ngResource', 'ui.bootstrap', 'myApp
     'RadicalRatios.home', 'RadicalRatios.instructor', 'RadicalRatios.answer', 'Quintus', 'RadicalRatios.template',
     'RadicalRatios.game','RadicalRatios.game.game3','RadicalRatios.game.game4', 'RadicalRatios.game.options',
     'RadicalRatios.game.options.linkSession','RadicalRatios.game.game1','RadicalRatios.game.game2',
-    'RadicalRatios.navBar'
+    'RadicalRatios.navBar', 'RadicalRatios.gameover'
 ])
     /**
      *  Non-authed routes:
