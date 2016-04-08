@@ -2,7 +2,7 @@
 
 angular.module('RadicalRatios.game.game1', ['ngRoute'])
 
-    .controller('Game1Controller',['$scope','$location', 'ngAudio', function($scope, $location, ngAudio){
+    .controller('Game1Controller',['$scope','$location', 'ngAudio', '$uibModal', function($scope, $location, ngAudio, $uibModal){
 
         $scope.audio = ngAudio.load('sound/boopboop.wav');
         $scope.audio.volume = 1;
@@ -20,9 +20,27 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
         $scope.max = 10;
         var levelCount = 0;
         var ans = 0;
-        $scope.ansMessage;
-        $scope.messageType = "success"
-        $scope.displayMode = "none";
+
+
+        $scope.correctModal = function(){
+            var correctModalInstance = $uibModal.open({
+                templateUrl: '/answer/templates/correct.html',
+                size: 'md'
+            });
+        }
+
+        $scope.incorrectModal = function(){
+            var incorrectModalInstance = $uibModal.open({
+                templateUrl: '/answer/templates/incorrect.html',
+                size: 'md',
+                controller: 'IncorrectController',
+                resolve: {
+                    answer: function () {
+                        return ans;
+                    }
+                }
+            });
+        }
 
         function newProblem(){
             $scope.questions++;
@@ -101,20 +119,16 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
             var o1 = getObject1Value();
 
             if (o1 == ans){
-                $scope.displayMode = "";
-                $scope.ansMessage = "Correct!";
-                $scope.messageType = "success"
+                $scope.correctModal();
                 addObject("correctAnswer");
                 correct++;
                 levelCount++;
             }
             else {
-                $scope.displayMode = "";
-                $scope.ansMessage = "Incorrect (expected " + ans + ")";
-                $scope.messageType = "danger"
+                $scope.incorrectModal();
                 addObject("wrongAnswer");
-
             }
+
             disableButtons(true);
             //level up
             if (levelCount/2 >= level){
@@ -124,7 +138,7 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
             if ($scope.questions >= 10)
                 setTimeout(endGame, 3000);
             else
-                setTimeout(newProblem, 3000);
+                setTimeout(newProblem, 1000);
         };
 
         document.getElementById("addButton").onclick = function(){
@@ -214,6 +228,7 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
 
 
         $scope.navBack = function(){
+
             $location.path( "/game" );
         }
 
