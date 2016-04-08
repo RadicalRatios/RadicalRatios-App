@@ -1,148 +1,84 @@
 <div class="row">
     <head>
         <style>
-
-            #question{
-                padding-left: 10px;
-                position: relative;
-
-                font-size: xx-large;
-                background-color: lime;
-                width: 100%;
-                height: 54px;
-                border: 3px solid #73AD21;
-            }
-
-            #answer{
-
-                position: relativ;
-
-                font-size: large;
-                background-color: aqua;
-                width: 100%;
-                height: 30px;
-                border: 2px solid blue;
-            }
-
             .object1, .object2{
                 margin-left: 3px;
                 margin-right: 3px;
-                height: 25px;
-                width: 25px;
+                padding-bottom: 8px;
+                height: 100px;
+                width: 100px;
 
                 display: inline-block;
             }
 
             .object2{
-                background-color: red;
-                border-color: black;
-                border-style: solid;
+                background-image: url('/images/orange-icon.png');
+                background-repeat:no-repeat;
+                background-size: 100%;
+                -webkit-animation: example .2s, rolling 6s .2s infinite; /* Chrome, Safari, Opera */
+                -webkit-transition-timing-function: ease-in-out;
+                transform-origin: bottom;
+
             }
 
             .object1{
-                background-color: blue;
-                border-color: black;
-                border-style: dotted;
-                -webkit-animation-name: example; /* Chrome, Safari, Opera */
-                -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
-                animation-name: example;
-                animation-duration: .2s;
+                -webkit-animation: example .2s, swinging 4s .2s infinite; /* Chrome, Safari, Opera */
+                -webkit-transition-timing-function: ease-in-out;
                 position: relative;
+                background-image: url('/images/banana.png');
+                background-repeat:no-repeat;
+                background-size: 100%;
+                transform-origin: top;
             }
-
 
             @-webkit-keyframes example {
-                0%   {height: 0px; width: 0px;}
-                40%  {height: 12px; width: 12px;}
-                80%  {height: 24px; width: 24px;}
-                90%  {height: 22px; width: 22px;}
-                100% {height: 24px; width: 24px;}
+                0%   {-webkit-transform: scale(0);}
+                60%  {-webkit-transform: scale(1.1);}
+                80%  {-webkit-transform: scale(.9);}
+                100%  {-webkit-transform: scale(1);}
             }
 
-
-
-
-            .objectRow{
-                display: inline-block;
+            @-webkit-keyframes swinging{
+                0%{-webkit-transform: rotate(0deg);}
+                50%{-webkit-transform: rotate(10deg)}
+                100%{-webkit-transform: rotate(0deg);}
             }
 
-            #objectsDiv{
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-
-            #addButton, #subtractButton{
-                height: 60px;
-                width: 60px;
-                top: 40%;
-                position: fixed;
-            }
-
-            #addButton{
-                right: 15%;
-                position: absolute;
-            }
-
-            #subtractButton{
-                left: 15%;
-                position: absolute;
-            }
-
-            #submit{
-                position: absolute;
-                left: 50%;
-                bottom: 10px;
-                width: 84px;
-                height: 50px;
-                transform: translate(-50%, -50%);
-            }
-
-            #score{
-                position: absolute;
-                left: 10px;
-                bottom:0px;
+            @-webkit-keyframes rolling{
+                0%{-webkit-transform: scale(1);}
+                50%{-webkit-transform: scale(.95);}
+                100%{-webkit-transform: scale(1);}
             }
 
         </style>
     </head>
-    <body>
-    <div align="center" id="question">
+    <div class="col-sm-12">
+        <div id="question" class="well" style="padding:0px;">
+            <h3 style="text-align:center; margin-top: 10px; margin-bottom: 10px;">The Ratio of Bananas to Oranges should be
+                <span class="label label-primary"><strong>{{dividend}}:{{divisor}}</strong></span></h3>
+        </div>
 
+        <div id="progressBar" class="progress" style="height: 22px;">
+        </div>
 
-    </div>
-    <div align="center" id="answer">
-    </div>
-    <div>
-
-    </div>
-    <button id="subtractButton">-</button>
-
-    <button id="addButton">+</button>
-    <div align="center" id="objectsDiv">
-        <div id="object1Div" class="objectRow"></div>
-        <br>
-        <div id="object2Div" class="objectRow"></div>
-    </div>
-</div>
-<br>
-<button id="submit" >Submit</button>
-</body>
-<div id="score"></div>
-
-
-</div>
-<div class="row">
-    <div class="col-xs-12">
-        <div class="row row-space">
-            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">
-                <a class="btn btn-primary btn-block" ng-click="navBack()">
-                    Back
-                </a>
+         <div class="row row-space">
+            <div align="center" id="objectsDiv">
+                <div id="object1Div" class="objectRow"></div>
+                <div id="object2Div" class="objectRow"></div>
             </div>
         </div>
+    </div>
+</div>
+<div class="row row-space col-sm-12">
+    <div class="col-sm-6">
+        <button class="btn btn-danger btn-block" id="subtractButton">Less Bananas!</button>
+        <a class="btn btn-primary btn-block" ng-click="navBack()">
+            Back
+        </a>
+    </div>
+    <div class="col-sm-6">
+        <button class="btn btn-success btn-block" id="addButton">More Bananas!</button>
+        <button class="btn btn-primary btn-block" id="submit" >Submit</button>
     </div>
 </div>
 

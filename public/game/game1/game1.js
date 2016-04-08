@@ -2,44 +2,98 @@
 
 angular.module('RadicalRatios.game.game1', ['ngRoute'])
 
-    .controller('Game1Controller',['$scope','$location', function($scope, $location){
+    .controller('Game1Controller',['$scope','$location', 'ngAudio', '$uibModal', function($scope, $location, ngAudio, $uibModal){
 
+        $scope.audio = ngAudio.load('sound/boopboop.wav');
+        $scope.audio.volume = 1;
+        $scope.audio2 = ngAudio.load('sound/boopboop.wav');
+        $scope.audio2.volume = 1;
+        $scope.audio3 = ngAudio.load('sound/boopboop.wav');
+        $scope.audio3.volume = 1;
+        var audioFlag =0;
 
-
-        var dividend;
-        var divisor;
+        $scope.dividend;
+        $scope.divisor;
         var level = 1;
         var correct = 0;
-        var questions = 0;
+        $scope.questions = 0;
+        $scope.max = 10;
         var levelCount = 0;
         var ans = 0;
 
+
+        $scope.correctModal = function(){
+            var correctModalInstance = $uibModal.open({
+                templateUrl: '/answer/templates/correct.html',
+                size: 'md'
+            });
+        }
+
+        $scope.incorrectModal = function(){
+            var incorrectModalInstance = $uibModal.open({
+                templateUrl: '/answer/templates/incorrect.html',
+                size: 'md',
+                controller: 'IncorrectController',
+                resolve: {
+                    answer: function () {
+                        return ans;
+                    }
+                }
+            });
+        }
+
         function newProblem(){
-            questions++;
-            updateScore();
-            dividend = level + Math.round((Math.random() * 2+correct/3));
-            divisor  = Math.floor((Math.random() * 6)+1+level/2);
+            $scope.questions++;
+            $scope.dividend = level + Math.round((Math.random() * 2+correct/3));
+            $scope.divisor  = Math.floor((Math.random() * 6)+1+level/2);
 
-            var q = document.getElementById("question");
-
-            q.innerHTML = "" + dividend + ":" + divisor;
-            var q = document.getElementById("answer");
-            q.innerHTML = "";
+            $scope.ansMessage = "";
+            $scope.displayMode = "none";
 
             clearObjects();
             calculate();
             newGame();
             disableButtons(false);
+            addObject("newQuestion");
+
         }
 
         function addObject(t){
             var x = document.createElement('div');
 
-            x.className=t;
-            if (t == "object1")
+            if (t == "object1") {
+                x.className = t;
                 document.getElementById("object1Div").appendChild(x);
-            else
+            }
+            else if (t == "object2") {
+                x.className = t;
                 document.getElementById("object2Div").appendChild(x);
+            }
+            else if (t == "correctAnswer"){
+                var bar = document.getElementById("progressBar")
+                bar.removeChild(bar.lastChild)
+                x.className="progress-bar progress-bar-success";
+                var y = document.createElement('span');
+                y.className="glyphicon glyphicon-ok";
+                x.appendChild(y);
+                bar.appendChild(x);
+            }
+            else if (t == "wrongAnswer"){
+                var bar = document.getElementById("progressBar")
+                bar.removeChild(bar.lastChild)
+                x.className="progress-bar progress-bar-danger";
+                var y = document.createElement('span');
+                y.className="glyphicon glyphicon-remove";
+                x.appendChild(y);
+                bar.appendChild(x);
+            }
+            else if (t == "newQuestion"){
+                var bar = document.getElementById("progressBar")
+                x.className="progress-bar progress-bar-striped progress-bar-info active ";
+                bar.appendChild(x);
+            }
+
+
         }
 
 
@@ -64,31 +118,47 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
         b.onclick = function(){
             var o1 = getObject1Value();
 
-            var q = document.getElementById("answer");
-
             if (o1 == ans){
-                q.innerHTML = "Correct!";
+                $scope.correctModal();
+                addObject("correctAnswer");
                 correct++;
                 levelCount++;
             }
-            else
-                q.innerHTML = "Incorrect (expected "+ans+")";
+            else {
+                $scope.incorrectModal();
+                addObject("wrongAnswer");
+            }
+
             disableButtons(true);
             //level up
             if (levelCount/2 >= level){
                 level++;
                 levelCount = 0;
             }
-            if (questions >= 10)
+            if ($scope.questions >= 10)
                 setTimeout(endGame, 3000);
             else
-                setTimeout(newProblem, 3000);
+                setTimeout(newProblem, 1000);
         };
 
         document.getElementById("addButton").onclick = function(){
             var n = getObject1Value();
             if (n < 36)
                 addObject("object1");
+
+            if(audioFlag === 0) {
+                $scope.audio.play();
+                audioFlag = 1;
+            }
+            else if(audioFlag === 1){
+                $scope.audio2.play();
+                audioFlag = 2;
+            }
+            else{
+                $scope.audio3.play();
+                audioFlag = 0;
+            }
+
         }
 
         document.getElementById("subtractButton").onclick = function(){
@@ -112,9 +182,9 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
         }
 
         function calculate(){
-            var m = gcm(dividend,divisor);
-            var a =  dividend / m;
-            var b =  divisor / m;
+            var m = gcm($scope.dividend,$scope.divisor);
+            var a =  $scope.dividend / m;
+            var b =  $scope.divisor / m;
 
 //determine problem difficulty
 
@@ -144,11 +214,6 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
             alert("Thanks for playing. You got " + correct + "/10 questions correct. Please submit your score.");
         }
 
-        function updateScore(){
-            var q = document.getElementById("score");
-            q.innerHTML = "question "+ questions + "/10";
-
-        }
         newProblem();
 
 //clearObjects();
@@ -163,6 +228,7 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
 
 
         $scope.navBack = function(){
+
             $location.path( "/game" );
         }
 
