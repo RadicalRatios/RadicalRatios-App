@@ -1,7 +1,9 @@
 <div class="modal-body" style="border-radius:4px; background-color:#337ab7;text-align:center;">
     <h1><strong style="color: white;">Finished!</strong></h1>
-    <span class="glyphicon glyphicon-star-empty" style="font-size:11.5em; color:white;"></span>
-    <span class="glyphicon glyphicon-star-empty"style="font-size:11.5em; color:white;"></span>
-    <span class="glyphicon glyphicon-star-empty"style="font-size:11.5em; color:white;"></span>
-    <h1><strong style="color: white;">You got {{score}}/10 questions correct!</strong></h1>
+    <div id="starsDiv">
+    <span class="glyphicon {{starType1}} star1"></span>
+    <span class="glyphicon {{starType2}} star2"></span>
+    <span class="glyphicon {{starType3}} star3"></span>
+    </div>
+    <h1><strong style="color: white;">You answered {{score}}/10 questions correct!</strong></h1>
 </div>
