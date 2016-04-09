@@ -2,8 +2,31 @@
 
 angular.module('RadicalRatios.game', ['ngRoute'])
 
-    .controller('GameController',['$scope','$location', function($scope, $location){
+    .controller('GameController',['$scope','$location', '$rootScope', function($scope, $location, $rootScope){
         $scope.name = "Wow this game is AMAZING";
+       // $scope.game1score = $rootScope.game1score;
+       // $scope.game1stars = $rootScope.game1stars;
+
+        if($rootScope.game1stars === 0 || (!angular.isDefined($rootScope.game1stars))) {
+            $scope.starType1 = "glyphicon-star-empty";
+            $scope.starType2 = "glyphicon-star-empty";
+            $scope.starType3 = "glyphicon-star-empty";
+        }
+        else if($rootScope.game1stars === 1){
+            $scope.starType1 = "glyphicon-star";
+            $scope.starType2 = "glyphicon-star-empty";
+            $scope.starType3 = "glyphicon-star-empty";
+        }else if($rootScope.game1stars === 2){
+            $scope.starType1 = "glyphicon-star";
+            $scope.starType2 = "glyphicon-star";
+            $scope.starType3 = "glyphicon-star-empty";
+        }else if($rootScope.game1stars === 3){
+            $scope.starType1 = "glyphicon-star";
+            $scope.starType2 = "glyphicon-star";
+            $scope.starType3 = "glyphicon-star";
+        }
+
+
 
         $scope.navToGame1 = function(){
             $location.path( "/game/game1" );

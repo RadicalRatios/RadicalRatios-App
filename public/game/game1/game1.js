@@ -50,6 +50,10 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
                 resolve: {
                     score: function () {
                         return correct;
+                    },
+
+                    gameNumber: function () {
+                        return 1;
                     }
                 }
             });
@@ -234,15 +238,6 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
         newProblem();
 
 //clearObjects();
-
-
-
-
-
-
-
-
-
 
         $scope.navBack = function(){
 
