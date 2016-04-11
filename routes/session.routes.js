@@ -8,11 +8,15 @@ router.route('/session')
     */
     .post(function(req, res) {
 
-        if (req.app) {
+        var key = 1234567890;
+
+        if (req.app && req.body.email) {
             req.app.mailer.send('sample-email', {
-                to: 'jpwidmer@uwm.edu', // REQUIRED. This can be a comma delimited string
-                subject: 'Test Email' // REQUIRED.
-                // otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
+                to: req.body.name || req.body.email, // REQUIRED. This can be a comma delimited string
+                subject: 'Test Email', // REQUIRED.
+                // Local params for email template:
+                emailAddress: req.body.email,
+                key: key
             }, function (err) {
                 if (err) {
                     // handle error
@@ -25,7 +29,7 @@ router.route('/session')
         }
 
         res.json({
-            key: 1234567890
+            key: key
         });
     })
 

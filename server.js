@@ -20,6 +20,7 @@ app.use('/api', require('./routes/session.routes'));
 
 // Setup mailer
 app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 
 mailer.extend(app, {
     from: 'no-reply@radicalratios.com',
@@ -29,7 +30,7 @@ mailer.extend(app, {
     transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
     auth: {
         user: 'radicalratios2016@gmail.com',
-        pass: 'uwmcapstone1'
+        pass: 'uwmcapstone'
     }
 });
 
