@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="TrukSpot" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="TrukSpot" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="TrukSpot" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="TrukSpot" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html lang="en" ng-app="RadicalRatios" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="RadicalRatios" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="RadicalRatios" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="RadicalRatios" class="no-js"> <!--<![endif]-->
 <head>
+    <script src='quintus-all.js'></script>
     <base href="/">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TrukSpot</title>
+    <title>Radical Ratios</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
     <!--Import materialize.css and style sheet-->
-    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"  media="screen,projection"/>
     <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
     <link rel="stylesheet" href="app.css">
 
     <!-- Angular, and the like-->
@@ -26,45 +26,56 @@
     <script src="bower_components/angular-route/angular-route.min.js"></script>
     <script src="bower_components/angular-loader/angular-loader.min.js"></script>
     <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-audio//app/angular.audio.js"></script>
+
+
+    <script src="angularquintus.js"></script>
 
     <!-- Load these here, because I don't wana use Gulp right now ;) -->
     <script src="app.js"></script>
+    <script src="services/instructor.service.js"></script>
+    <script src="services/game.service.js"></script>
+    <script src="services/index.js"></script>
     <script src="home/home.js"></script>
-    <script src="about/about.js"></script>
-    <script src="user/user.js"></script>
-    <script src="myTruck/myTruck.js"></script>
     <script src="components/version/version.js"></script>
     <script src="components/version/version-directive.js"></script>
+    <script src="instructor/instructor.js"></script>
+    <script src="pageTemplate/pageTemplate.js"></script>
+    <script src="game/game.js"></script>
+    <script src="options/options.js"></script>
+    <script src="linkSession/linkSession.js"></script>
+    <script src="game/game1/game1.js"></script>
+    <script src="game/game2/game2.js"></script>
+    <script src="game/game3/game3.js"></script>
+    <script src="game/game4/game4.js"></script>
+    <script src="navbar/navbar.js"></script>
+    <script src="answer/incorrect.js"></script>
+    <script src="answer/gameover.js"></script>
 
 </head>
 <body>
-    <div class="corner-ribbon sticky z-depth-2">Beta</div>
+<div style="background-image: url('/images/dopebackgroundcrop.gif');
+                    background-size: 100% 100%;
+                    background-repeat: no-repeat;
+                    height:100vh;">
+    <!--<div class="corner-ribbon sticky z-depth-2">Beta</div>-->
 
-    <nav class="truk-dark-green waves-effect" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" style="z-index: 10;" href="#/about" class="header-link brand-logo lobsterize">TrukSpot</a>
-            <!-- TODO: Enable when the app goes v1-->
-            <!--<ul class="right hide-on-med-and-down">-->
-                <!--<li><a class="header-link" href="#/login">Login</a></li>-->
-                <!--<li><a class="header-link" href="#/my-truck"><i class="mdi-maps-local-shipping left"></i>My Truk</a></li>-->
-            <!--</ul>-->
+    <nav-bar></nav-bar>
+    <div class="container">
+        <div ng-view></div>
 
-            <!--<ul id="nav-mobile" class="side-nav" style="left: -250px;">-->
-                <!--<li><a class="header-link" href="#/login">Login</a></li>-->
-            <!--</ul>-->
-            <!--<a data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>-->
-        </div>
-    </nav>
+        <div class="hiddendiv common"></div><div class="drag-target" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
+        <script src="components/version/interpolate-filter.js"></script>
+
+    </div><!-- /.container -->
 
     <div>
         <!--[if lt IE 8]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div ng-view></div>
     </div>
-    <div class="hiddendiv common"></div><div class="drag-target" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
-    <!-- In production use:
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-    -->
-    <script src="components/version/interpolate-filter.js"></script>
+    </div>
 </body>
 </html>

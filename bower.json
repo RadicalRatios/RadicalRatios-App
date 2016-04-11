@@ -1,19 +1,22 @@
 {
-  "name": "TrukSpot",
+  "name": "RadicalRatios",
   "description": "An app to help locate food trucks",
   "version": "0.0.0",
   "homepage": "http://trukspot.herokuapp.com",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "~1.3.4",
-    "angular-route": "~1.3.4",
-    "angular-resource": "~1.3.4",
-    "angular-loader": "1.3.4",
-    "angular-mocks": "~1.3.4",
-    "html5-boilerplate": "~4.3.0"
+    "angular": "1.4.x",
+    "angular-route": "~1.4.x",
+    "angular-resource": "~1.4.x",
+    "angular-loader": "1.4.x",
+    "angular-mocks": "~1.4.x",
+    "html5-boilerplate": "~4.3.0",
+    "bootstrap": "3.3.6",
+    "angular-bootstrap": "1.2.5",
+    "angular-audio": "ngAudio#^1.7.1"
   },
   "resolutions": {
-    "angular": "~1.3.4"
+    "angular": "~1.4.x"
   }
 }

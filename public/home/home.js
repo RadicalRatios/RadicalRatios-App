@@ -1,7 +1,13 @@
 'use strict';
 
-angular.module('TrukSpot.home', ['ngRoute'])
+angular.module('RadicalRatios.home', ['ngRoute'])
 
-.controller('HomeCtrl', [function() {
+    .controller('HomeController',['$scope', '$location', function($scope, $location){
+        $scope.name = "Welcome to Radical Ratios!";
 
-}]);
+        $scope.navToGame = function(){
+            $location.path( "/game" );
+        }
+
+
+    }]);
