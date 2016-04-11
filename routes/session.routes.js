@@ -7,6 +7,23 @@ router.route('/session')
     * Returns new Session
     */
     .post(function(req, res) {
+
+        if (req.app) {
+            req.app.mailer.send('sample-email', {
+                to: 'jpwidmer@uwm.edu', // REQUIRED. This can be a comma delimited string
+                subject: 'Test Email' // REQUIRED.
+                // otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
+            }, function (err) {
+                if (err) {
+                    // handle error
+                    console.log(err);
+                    res.send('There was an error sending the email');
+                    return;
+                }
+                console.log('Email sent!');
+            });
+        }
+
         res.json({
             key: 1234567890
         });

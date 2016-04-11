@@ -1,21 +1,37 @@
 /**
  *  Set up ======================================================================
  */
-var express = require('express');
+var express = require('express'),
+    mailer = require('express-mailer'),
+    bodyParser = require('body-parser');
+
 var app = express();
-var bodyParser = require('body-parser');
 var port = process.env.PORT || 8080;
-var router = express.Router();
 
 /**
  *  Configuration, Routes =======================================================
  */
-// configure app to use bodyParser()
-// this will let us get the data from a POST
+// Configure app to use bodyParser(); This will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Setup Routes
 app.use('/api', require('./routes/session.routes'));
+
+// Setup mailer
+app.set('views', __dirname + '/views');
+
+mailer.extend(app, {
+    from: 'no-reply@radicalratios.com',
+    host: 'smtp.gmail.com', // hostname
+    secureConnection: true, // use SSL
+    port: 465, // port for secure SMTP
+    transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+    auth: {
+        user: 'radicalratios2016@gmail.com',
+        pass: 'uwmcapstone1'
+    }
+});
 
 /**
  *  Define model ================================================================
