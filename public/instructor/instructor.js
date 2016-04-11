@@ -34,13 +34,13 @@ angular.module('RadicalRatios.instructor', [
             else {
                 $scope.instructorNameDisplay = $scope.instructorName;
 
-                Instructor.createSession($scope.instructorNameDisplay, $scope.instructorEmail, $scope.instructorPassword).then(function(key) {
-                    $scope.sessionKey = key;
+                Instructor.createSession($scope.instructorNameDisplay, $scope.instructorEmail, $scope.instructorPassword).then(function(resp) {
+                    $scope.sessionKey = resp.data.key;
 
                     $scope.inputError = false;
                     $scope.messages = {first: 'Sucess!',
                         second: "You've created a session."};
-                    $scope.clearInputs();
+                    clearInputs();
                 });
             }
         }
@@ -55,7 +55,7 @@ angular.module('RadicalRatios.instructor', [
                     second: 'You must fill in all information.'};
             }
             else {
-                Game.closeSession($scope.gameKey).then(function() {
+                Instructor.closeSession($scope.gameKey).then(function() {
                     $scope.closedSession = true;
                     $scope.closedGameKey = gameKey;
                     clearInputs();

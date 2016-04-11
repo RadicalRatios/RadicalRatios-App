@@ -15,19 +15,8 @@ angular.module('RadicalRatios.services.game', [
             return deferred.promise;
         }
 
-        function closeSession(sessionKey) {
-            var deferred = $q.defer();
-
-            // TODO:
-
-            deferred.resolve(sessionKey);
-
-            return deferred.promise;
-        }
-
         var service = {
-            updateScore: updateScore,
-            closeSession: closeSession
+            updateScore: updateScore
         };
 
         return service;
