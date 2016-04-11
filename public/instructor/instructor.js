@@ -2,7 +2,7 @@
 
 angular.module('RadicalRatios.instructor', [
     ])
-    .controller('InstructorController', ['$scope', '$location', function($scope){
+    .controller('InstructorController', ['$scope', '$location', 'Instructor', function($scope, $location, Instructor){
 
         $scope.sessionKey = null;
         $scope.instructorName = null;
@@ -27,12 +27,16 @@ angular.module('RadicalRatios.instructor', [
             }
             else {
                 $scope.instructorNameDisplay = $scope.instructorName;
-                $scope.sessionKey = generateID();
-                $scope.inputError = false;
-                $scope.keyMade = true;
-                $scope.messages = {first: 'Sucess!',
-                    second: "You've created a session."};
-                $scope.clearInputs();
+
+                Instructor.createSession($scope.instructorNameDisplay, $scope.instructorEmail, $scope.instructorPassword).then(function(key) {
+                    $scope.sessionKey = key;
+
+                    $scope.inputError = false;
+                    $scope.keyMade = true;
+                    $scope.messages = {first: 'Sucess!',
+                        second: "You've created a session."};
+                    $scope.clearInputs();
+                });
             }
         }
 
@@ -47,19 +51,6 @@ angular.module('RadicalRatios.instructor', [
             $scope.instructorEmail = null;
             $scope.instructorPassword = null;
             $scope.inputError = false;
-        }
-
-
-
-        function generateID()
-        {
-            var text = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-            for( var i=0; i < 5; i++ )
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-            return text;
         }
 
 
