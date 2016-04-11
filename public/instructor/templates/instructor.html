@@ -154,6 +154,42 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-xs-5"><hr/></div>
+            <div class="col-xs-2">
+                <div class="text-center" style="margin-top: 10px;">Or</div>
+            </div>
+            <div class="col-xs-5"><hr/></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row" style="height: 75px; text-align:center;" ng-show="closedSession">
+                    <div ng-class="inputError? 'alert alert-danger' : 'alert alert-success'"
+                             role="alert" >
+                        <h4>
+                            <strong>{{messages.first}}</strong> {{messages.second}}
+                            <span ng-show="!inputError" class="label label-primary"><strong>Session Closed: {{closedGameKey}}</strong></span>
+                        </h4>
+                    </div>
+                </div>
+                <form class="form-horizontal col-sm-12" name="instructorInputForm2" >
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input class="form-control" id="Game Key" placeholder="Game Key"
+                                   ng-model="gameKey" >
+                        </div>
+                    </div>
+                </form>
+                <div class=" row-space col-sm-12">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <a class="btn btn-success btn-block"
+                           ng-click="closeSession()">
+                            End Gaming Session
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="modal-footer">

@@ -2,14 +2,19 @@
 
 angular.module('RadicalRatios.instructor', [
     ])
-    .controller('InstructorController', ['$scope', '$location', 'Instructor', function($scope, $location, Instructor){
+    .controller('InstructorController', ['$scope', '$location', 'Instructor', 'Game',
+        function($scope, $location, Instructor, Game){
 
         $scope.sessionKey = null;
+        $scope.closedGameKey = null;
         $scope.instructorName = null;
         $scope.instructorNameDisplay = null;
         $scope.instructorEmail = null;
         $scope.instructorPassword = null;
+        $scope.gameKey = null;
+
         $scope.keyGenerate = false;
+        $scope.closedSession = false;
         $scope.inputError = false;
         $scope.radioModel = 'Left';
 
@@ -18,9 +23,10 @@ angular.module('RadicalRatios.instructor', [
         }
 
         $scope.generateKey = function(){
+            clearAllDialog();
             $scope.keyGenerate = true;
+
             if(isEmpty($scope.instructorName) || isEmpty($scope.instructorEmail) || isEmpty($scope.instructorPassword)){
-                $scope.keyMade = false;
                 $scope.inputError = true;
                 $scope.messages = {first: 'Attention!',
                     second: 'You must fill in all information.'};
@@ -32,7 +38,6 @@ angular.module('RadicalRatios.instructor', [
                     $scope.sessionKey = key;
 
                     $scope.inputError = false;
-                    $scope.keyMade = true;
                     $scope.messages = {first: 'Sucess!',
                         second: "You've created a session."};
                     $scope.clearInputs();
@@ -40,17 +45,43 @@ angular.module('RadicalRatios.instructor', [
             }
         }
 
-        $scope.clearAll = function(){
-            $scope.keyMade = false;
-            $scope.keyGenerate = false;
-            $scope.clearInputs();
+        $scope.closeSession = function() {
+            clearAllDialog();
+
+            if(isEmpty($scope.gameKey)){
+                $scope.closedSession = true;
+                $scope.inputError = true;
+                $scope.messages = {first: 'Attention!',
+                    second: 'You must fill in all information.'};
+            }
+            else {
+                Game.closeSession($scope.gameKey).then(function() {
+                    $scope.closedSession = true;
+                    $scope.closedGameKey = gameKey;
+                    clearInputs();
+                });
+            }
         }
 
-        $scope.clearInputs = function(){
+        $scope.clearAll = function(){
+            clearAllDialog();
+            clearInputs();
+        }
+
+        var clearAllDialog = function(){
+            $scope.keyGenerate = false;
+            $scope.closedSession = false;
+            $scope.messages = null;
+            $scope.sessionKey = null;
+            $scope.closedGameKey = null;
+            $scope.inputError = false;
+        }
+
+        var clearInputs = function(){
             $scope.instructorName = null;
             $scope.instructorEmail = null;
             $scope.instructorPassword = null;
-            $scope.inputError = false;
+            $scope.gameKey = null;
         }
 
 
