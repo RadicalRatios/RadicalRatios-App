@@ -12,7 +12,7 @@ router.route('/session')
 
         if (req.app && req.body.email) {
             req.app.mailer.send('sample-email', {
-                to: req.body.name || req.body.email, // REQUIRED. This can be a comma delimited string
+                to: req.body.email, // REQUIRED. This can be a comma delimited string
                 subject: 'Test Email', // REQUIRED.
                 // Local params for email template:
                 emailAddress: req.body.email,
