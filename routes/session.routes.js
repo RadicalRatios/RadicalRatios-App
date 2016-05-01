@@ -1,6 +1,11 @@
 var express = require('express'),
     router = express.Router();
 
+// Define models
+var Student = require('../models/Student');
+var Game = require('../models/Game');
+var Session = require('../models/Session');
+
 router.route('/session')
 
     /*
@@ -8,15 +13,19 @@ router.route('/session')
     */
     .post(function(req, res) {
 
-        var key = 1234567890;
+        var newSession = new Session();
+        newSession.createKey();
 
         if (req.app && req.body.email) {
+            newSession.email = req.body.email
+            console.log(newSession);
+
             req.app.mailer.send('sample-email', {
                 to: req.body.email, // REQUIRED. This can be a comma delimited string
                 subject: 'Test Email', // REQUIRED.
                 // Local params for email template:
                 emailAddress: req.body.email,
-                key: key
+                key: newSession.key
             }, function (err) {
                 if (err) {
                     // handle error
@@ -29,7 +38,7 @@ router.route('/session')
         }
 
         res.json({
-            key: key
+            session: newSession
         });
     })
 
@@ -37,15 +46,12 @@ router.route('/session')
     * Returns all Sessions
     */
     .get(function(req, res) {
-        // Truck.find(function(err, trucks) {
-        //  if (err) {
-        //      res.send(err);
-        //  } else {
-        //      res.json(trucks);
-        //  }
-        // });
-        res.json({
-            sessions: [1234567890]
+        Session.find(function(err, sessions) {
+            if (err) {
+                res.send(err);
+            } else {
+               res.json({sessions: sessions});
+            }
         });
     });
 
@@ -100,16 +106,15 @@ router.route('/session/:id')
     * Deletes Session, empty return (?)
     */
     .delete(function(req, res) {
-        // Truck.remove({
-        //     _id: req.params.id
-        // }, function(err, bear) {
-        //     if (err)
-        //         res.send(err);
+        Truck.remove({
+            _id: req.body._id
+        }, function(err, bear) {
+            if (err)
+                res.send(err);
 
-        //     res.json({ message: 'Truck deleted' });
-        // });
+            res.json({ message: 'Truck deleted' });
+        });
 
-        // TODO:
         res.json({ message: 'Session ended' });
     });
 

@@ -2,6 +2,7 @@
  *  Set up ======================================================================
  */
 var express = require('express'),
+    db = require('./db/mdb'),
     mailer = require('express-mailer'),
     bodyParser = require('body-parser');
 

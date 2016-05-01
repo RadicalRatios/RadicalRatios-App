@@ -35,7 +35,11 @@ angular.module('RadicalRatios.instructor', [
                 $scope.instructorNameDisplay = $scope.instructorName;
 
                 Instructor.createSession($scope.instructorNameDisplay, $scope.instructorEmail, $scope.instructorPassword).then(function(resp) {
-                    $scope.sessionKey = resp.data.key;
+                    if (resp.data.session) {
+                        $scope.session = resp.data.session;
+                        $scope.sessionKey = resp.data.session.key;
+                        console.log(resp.data.session);
+                    }
 
                     $scope.inputError = false;
                     $scope.messages = {first: 'Sucess!',
