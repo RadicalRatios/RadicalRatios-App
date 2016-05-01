@@ -9,7 +9,7 @@ var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  // we're connected!
+  // We're connected!
   console.log('Connected to DB!');
   setupDatabase();
 });
@@ -17,10 +17,11 @@ db.once('open', function() {
 function setupDatabase() {
     // Create 4 games:
     // First, check for the games...
-    Game.find({ }, function (err, docs) {
-        console.log(err);
-        console.log(docs);
-        if (docs.length = 0) {
+    Game.find({}, function (err, gameDocs) {
+        console.log('Current games:');
+        console.log(gameDocs);
+        // Second, if they aren't in the DB, create them
+        if (gameDocs.length = 0) {
             for (var i = 1; i < 5; ++i) {
                 var newGame = new Game();
                 newGame.name = 'Game' + i;

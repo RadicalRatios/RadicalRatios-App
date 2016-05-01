@@ -118,22 +118,18 @@ router.route('/session/:id')
         res.json({ message: 'Session ended' });
     });
 
-router.route('/session/:id/games/:gameId')
+router.route('/games')
 
     /*
-    * Returns Game
+    * Returns all Games
     */
     .get(function(req, res) {
-
-        // TODO:
-        res.json({
-            id: 123,
-            gameName: 'Game X',
-            students: [{name: 'Johnny Kid', score: 21}, {name: 'Jimmy Kid', score: 22}]
+        Game.find({}, function (err, gameDocs) {
+            res.json(gameDocs);
         });
     });
 
-router.route('/session/:id/games/:gameId/student/:studentId')
+router.route('/session/:id/game/:gameId/student/:studentId')
 
     /*
     * Returns Student score
