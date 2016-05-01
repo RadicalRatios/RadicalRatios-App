@@ -42,6 +42,23 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
             });
         }
 
+        $scope.gameoverModal = function(){
+            var gameoverModalInstance = $uibModal.open({
+                templateUrl: '/answer/templates/gameover.html',
+                size: 'md',
+                controller: 'GameoverController',
+                resolve: {
+                    score: function () {
+                        return correct;
+                    },
+
+                    gameNumber: function () {
+                        return 1;
+                    }
+                }
+            });
+        }
+
         function newProblem(){
             $scope.questions++;
             $scope.dividend = level + Math.round((Math.random() * 2+correct/3));
@@ -166,7 +183,9 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
             var n = getObject1Value();
             if (n > 1){
                 if (x.hasChildNodes()) {
-                    x.removeChild(x.firstChild);
+                    x.lastChild.className = "object1delete";
+                    setTimeout(function() { x.removeChild(x.lastChild); }, 200);
+
                 }
             }
         }
@@ -211,21 +230,14 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
         }
 
         function endGame(){
-            alert("Thanks for playing. You got " + correct + "/10 questions correct. Please submit your score.");
+            setTimeout(function() {
+                $scope.gameoverModal();
+                $location.path( "/game" ); }, 1000);
         }
 
         newProblem();
 
 //clearObjects();
-
-
-
-
-
-
-
-
-
 
         $scope.navBack = function(){
 

@@ -2,14 +2,19 @@
 
 angular.module('RadicalRatios.instructor', [
     ])
-    .controller('InstructorController', ['$scope', '$location', function($scope){
+    .controller('InstructorController', ['$scope', '$location', 'Instructor', 'Game',
+        function($scope, $location, Instructor, Game){
 
         $scope.sessionKey = null;
+        $scope.closedGameKey = null;
         $scope.instructorName = null;
         $scope.instructorNameDisplay = null;
         $scope.instructorEmail = null;
         $scope.instructorPassword = null;
+        $scope.gameKey = null;
+
         $scope.keyGenerate = false;
+        $scope.closedSession = false;
         $scope.inputError = false;
         $scope.radioModel = 'Left';
 
@@ -18,48 +23,65 @@ angular.module('RadicalRatios.instructor', [
         }
 
         $scope.generateKey = function(){
+            clearAllDialog();
             $scope.keyGenerate = true;
+
             if(isEmpty($scope.instructorName) || isEmpty($scope.instructorEmail) || isEmpty($scope.instructorPassword)){
-                $scope.keyMade = false;
                 $scope.inputError = true;
                 $scope.messages = {first: 'Attention!',
                     second: 'You must fill in all information.'};
             }
             else {
                 $scope.instructorNameDisplay = $scope.instructorName;
-                $scope.sessionKey = generateID();
-                $scope.inputError = false;
-                $scope.keyMade = true;
-                $scope.messages = {first: 'Sucess!',
-                    second: "You've created a session."};
-                $scope.clearInputs();
+
+                Instructor.createSession($scope.instructorNameDisplay, $scope.instructorEmail, $scope.instructorPassword).then(function(resp) {
+                    $scope.sessionKey = resp.data.key;
+
+                    $scope.inputError = false;
+                    $scope.messages = {first: 'Sucess!',
+                        second: "You've created a session."};
+                    clearInputs();
+                });
+            }
+        }
+
+        $scope.closeSession = function() {
+            clearAllDialog();
+
+            if(isEmpty($scope.gameKey)){
+                $scope.closedSession = true;
+                $scope.inputError = true;
+                $scope.messages = {first: 'Attention!',
+                    second: 'You must fill in all information.'};
+            }
+            else {
+                Instructor.closeSession($scope.gameKey).then(function() {
+                    $scope.closedSession = true;
+                    $scope.closedGameKey = gameKey;
+                    clearInputs();
+                });
             }
         }
 
         $scope.clearAll = function(){
-            $scope.keyMade = false;
-            $scope.keyGenerate = false;
-            $scope.clearInputs();
+            clearAllDialog();
+            clearInputs();
         }
 
-        $scope.clearInputs = function(){
-            $scope.instructorName = null;
-            $scope.instructorEmail = null;
-            $scope.instructorPassword = null;
+        var clearAllDialog = function(){
+            $scope.keyGenerate = false;
+            $scope.closedSession = false;
+            $scope.messages = null;
+            $scope.sessionKey = null;
+            $scope.closedGameKey = null;
             $scope.inputError = false;
         }
 
-
-
-        function generateID()
-        {
-            var text = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-            for( var i=0; i < 5; i++ )
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-            return text;
+        var clearInputs = function(){
+            $scope.instructorName = null;
+            $scope.instructorEmail = null;
+            $scope.instructorPassword = null;
+            $scope.gameKey = null;
         }
 
 
