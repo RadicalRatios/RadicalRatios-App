@@ -3,6 +3,8 @@
 angular.module('RadicalRatios.game.game4', ['ngRoute', 'Quintus'])
 
     .controller('Game4Controller',[ '$window', '$scope', '$location', function($window, $scope, $location) {
+        var GAME_CONST = 'Game4';
+        $scope.name = 'Game4';
 
         $scope.$on("$destroy", function(){
             if (Q) {

@@ -3,6 +3,7 @@
 angular.module('RadicalRatios.game.game1', ['ngRoute'])
 
     .controller('Game1Controller',['$scope','$location', 'ngAudio', '$uibModal', function($scope, $location, ngAudio, $uibModal){
+        var GAME_CONST = 'Game1';
 
         $scope.audio = ngAudio.load('sound/boopboop.wav');
         $scope.audio.volume = 1;

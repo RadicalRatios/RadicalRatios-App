@@ -21,6 +21,30 @@ angular.module('RadicalRatios.services.game', [
             return deferred.promise;
         }
 
+        function getGame(id) {
+            var deferred = $q.defer();
+
+            function returnGame() {
+                angular.forEach(service.games, function(game) {
+                    if (game && game._id == id) {
+                        deferred.resolve(game);
+                    }
+                });
+            }
+
+            if (!service.games) {
+                service.getGames().then(function() {
+                    returnGame();
+                }, function() {
+                    deferred.reject(resp);
+                });
+            } else {
+                returnGame();
+            }
+
+            return deferred.promise;
+        }
+
         function getGames() {
             var deferred = $q.defer();
 
@@ -39,7 +63,8 @@ angular.module('RadicalRatios.services.game', [
         var service = {
             games: [],
             updateScore: updateScore,
-            getGames: getGames
+            getGames: getGames,
+            getGame: getGame
         };
 
         return service;
