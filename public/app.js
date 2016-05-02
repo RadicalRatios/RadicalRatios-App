@@ -71,8 +71,4 @@ angular.module('RadicalRatios', ['ngRoute', 'ngResource', 'ui.bootstrap', 'myApp
     .config(['$routeProvider', '$resourceProvider', function($routeProvider, $resourceProvider) {
         $routeProvider.otherwise({redirectTo: '/home'});
         $resourceProvider.defaults.stripTrailingSlashes = false;
-    }])
-
-    .run(['Game', function(Game) {
-        Game.getGames();
     }]);

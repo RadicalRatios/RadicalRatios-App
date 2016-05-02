@@ -1,10 +1,10 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
-    Game = require('./Game');
+    Game = require('./Game').schema;
 
 var Student = new Schema({
     name: String,
-    scores: { type : Array , "default" : [] } // [ { game: Game, score: Number } ]
+    games: [Game]
 });
 
 module.exports = mongoose.model('Student', Student);

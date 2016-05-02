@@ -6,19 +6,21 @@ angular.module('RadicalRatios.services.student', [
     .service('Student', ['$q', '$http', function($q, $http) {
 
         // Student can have...
-        // - id
+        // - _id
         // - name
-        // - scores: [ { game: Game, score: Number } ]
+        // - games: [ { name: GameX, score: Number } ]
         var student = {};
 
         function joinSession(sessionKey, name) {
             var deferred = $q.defer();
 
-            $http.post('/api/session/:id/student', {name: name, session: sessionKey})
+            $http.post('/api/session/' + sessionKey + '/student', {name: name})
                 .then(function(studentResp) {
+                    console.log(studentResp);
                     service.student = studentResp.data;
                     deferred.resolve(studentResp.data);
                 }, function(resp) {
+                    console.log('error', resp);
                     deferred.reject(resp);
                 });
 

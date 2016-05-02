@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    Student = require('./Student');
+    Student = require('./Student').schema;
 
 var Session = new Schema({
     key: String,

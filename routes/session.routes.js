@@ -21,11 +21,8 @@ router.route('/session')
 
             newSession.save(function(err, sessionDoc) {
                 if (err) {
-                    res.send({ error: err });
+                    res.send(err);
                 } else {
-                    console.log('Session created!');
-                    console.log(sessionDoc);
-
                     req.app.mailer.send('sample-email', {
                         to: req.body.email, // REQUIRED. This can be a comma delimited string
                         subject: 'Test Email', // REQUIRED.
@@ -66,117 +63,119 @@ router.route('/session')
 
 router.route('/session/:id')
 
-    // Not sure if 'post' is needed for this endpoint
-    .post(function(req, res) {
-        // Truck.findById(req.params.id, function(err, truck) {
-        //     if (err) {
-        //         res.send(err);
-        //     }
-
-        //     truck.name = req.body.name;
-        //     truck.location.latitude = req.body.location.latitude;
-        //     truck.location.longitude = req.body.location.longitude;
-
-        //     truck.save(function(err) {
-        //         if (err) {
-        //             res.send(err);
-        //         } else {
-        //             res.json({message: 'Truck updated!'});
-        //         }
-        //     });
-        // });
-
-        // TODO:
-        res.json({
-            id: 123
-        });
-    })
-
     /*
     * Returns Session
     */
     .get(function(req, res) {
-        // Truck.findById(req.params.id, function(err, truck) {
-        //     if (err) {
-        //         res.send(err);
-        //     }
-        //     res.json(truck);
-        // });
-
-        // TODO:
-        res.json({
-            id: 123,
-            students: [{name: 'Johnny Kid'}, {name: 'Jimmy Kid'}]
+        Session.findById(req.params.id, function(err, sessionDoc) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(sessionDoc);
         });
     })
-
 
     /*
     * Deletes Session, empty return (?)
     */
     .delete(function(req, res) {
-        Truck.remove({
-            _id: req.body._id
-        }, function(err, bear) {
-            if (err)
-                res.send(err);
 
-            res.json({ message: 'Truck deleted' });
-        });
+        Session.findById(req.params.id, function(err, sessionDoc) {
 
-        res.json({ message: 'Session ended' });
-    });
+            // TODO: Aggregate scores, send out email
 
-router.route('/games')
+            req.app.mailer.send('sample-email', {
+                    to: req.body.email, // REQUIRED. This can be a comma delimited string
+                    subject: 'Test Email', // REQUIRED.
+                    // Local params for email template:
+                    emailAddress: req.body.email,
+                    key: sessionDoc.key
+                }, function (err) {
+                    if (err) {
+                        // handle error
+                        console.log(err);
+                        res.send('There was an error sending the email');
+                        return;
+                    }
+                    console.log('Email sent!');
+                });
 
-    /*
-    * Returns all Games
-    */
-    .get(function(req, res) {
-        Game.find({}, function (err, gameDocs) {
-            res.json(gameDocs);
-        });
+            // Remove session
+            Session.remove({
+                _id: req.params.id
+            }, function(err, bear) {
+                if (err) {
+                    res.send(err);
+                }
+
+                res.json({ message: 'Session deleted' });
+            });
+
+            res.json({ message: 'Session ended' });
+
+        }
+
     });
 
 router.route('/session/:id/student')
 
     /*
-    * Creates a Student, Adds to session
+    * Creates a Student, Adds to session; Returns Student
     */
     .post(function(req, res) {
-        var sessionKey = req.body.session;
+        var sessionKey = req.params.id;
 
-        Session.findOne({ key: sessionKey}, function(err, session) {
-            if (!err && session) {
+        Session.findOne({ key: sessionKey}, function(err, sessionDoc) {
+            if (!err && sessionDoc) {
+
                 var newStudent = new Student();
+                newStudent.name = req.body.name;
+
+                newStudent.save(function (err, studentDoc) {
+                    if (err) {
+                        res.send(err);
+                    }
+                    // Create Game 1-4
+                    var game = 'Game';
+
+                    for (var i = 1; i < 5; ++i) {
+                        var newGame = new Game();
+                        newGame.name = game + i;
+                        newGame.score = 0;
+
+                        newStudent.games.push(newGame);
+                        newGame.save();
+                    }
+
+                    sessionDoc.students.push(studentDoc);
+
+                    sessionDoc.save(function(err, sessionDoc) {
+                        res.json(studentDoc);
+                    });
+                });
 
             } else {
-                res.json({ error: err});
+                res.json(err);
             }
         });
     });
 
-router.route('/session/:id/game/:gameId/student/:studentId')
+router.route('/session/:id/student/:id')
 
     /*
     * Returns Student
     */
     .get(function(req, res) {
-
-        // TODO:
-        res.json({
-            id: 123,
-            game: {
-                id: 123,
-                name: 'Game X'
-            },
-            student: {
-                id: 123,
-                name: 'Jimmy Kid',
-                scope: 21
+        Student.findById(req.params.id, function(err, sessionDoc) {
+            if (err) {
+                res.send(err);
             }
+            res.json(sessionDoc);
         });
-    })
+
+    });
+
+router.route('/session/:id/student/:studentId/game/:gameId')
 
     /*
     * Used for starting game, updating score w/ progession
