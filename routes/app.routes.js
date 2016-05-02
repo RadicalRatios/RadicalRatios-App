@@ -93,7 +93,6 @@ router.route('/session/:id')
                     }, function (err) {
                         if (err) {
                             // handle error
-                            console.log(err);
                             res.send('There was an error sending the email');
                             return;
                         }
@@ -104,8 +103,8 @@ router.route('/session/:id')
                 sessionDoc.remove(function(err, bear) {
                     if (err) {
                         res.send(err);
+                        return;
                     }
-                    res.json({ message: 'Session deleted' });
                 });
             }
 

@@ -12,7 +12,8 @@
     "http-server": "^0.6.1",
     "karma": "^0.10",
     "karma-junit-reporter": "^0.2.2",
-    "mongoose": "^3.6.13",
+    "mongodb": "~2.0.36",
+    "mongoose": "^4.0.6",
     "protractor": "^1.1.1",
     "shelljs": "^0.2.6"
   },
