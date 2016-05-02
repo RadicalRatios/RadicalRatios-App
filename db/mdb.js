@@ -5,7 +5,8 @@ var MongoClient = require('mongodb').MongoClient,
     Session = require('../models/Session');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+// mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://radicalratios:uwmcapstone1@ds011902.mlab.com:11902/heroku_zc5jsz59');
 
 var db = mongoose.connection;
 
