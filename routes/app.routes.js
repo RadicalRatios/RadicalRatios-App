@@ -80,16 +80,15 @@ router.route('/session/:id')
     */
     .delete(function(req, res) {
 
-        Session.findById(req.params.id, function(err, sessionDoc) {
+        Session.findOne( { key: req.params.id}, function(err, sessionDoc) {
 
-            // TODO: Aggregate scores, send out email
-
-            req.app.mailer.send('sample-email', {
-                    to: req.body.email, // REQUIRED. This can be a comma delimited string
+            req.app.mailer.send('session-end', {
+                    to: sessionDoc.email, // REQUIRED. This can be a comma delimited string
                     subject: 'Test Email', // REQUIRED.
                     // Local params for email template:
-                    emailAddress: req.body.email,
-                    key: sessionDoc.key
+                    emailAddress: sessionDoc.email,
+                    key: sessionDoc.key,
+                    session: sessionDoc
                 }, function (err) {
                     if (err) {
                         // handle error
@@ -102,7 +101,7 @@ router.route('/session/:id')
 
             // Remove session
             Session.remove({
-                _id: req.params.id
+                _id: sessionDoc._id
             }, function(err, bear) {
                 if (err) {
                     res.send(err);
@@ -113,7 +112,7 @@ router.route('/session/:id')
 
             res.json({ message: 'Session ended' });
 
-        }
+        });
 
     });
 

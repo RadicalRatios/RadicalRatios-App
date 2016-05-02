@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Setup Routes
-app.use('/api', require('./routes/session.routes'));
+app.use('/api', require('./routes/app.routes'));
 
 // Setup mailer
 app.set('views', __dirname + '/views');

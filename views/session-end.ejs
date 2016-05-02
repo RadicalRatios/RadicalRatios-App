@@ -204,6 +204,22 @@
       .content table {
         width: 100%;
       }
+
+      .email-table {
+        border:1px solid #C0C0C0;
+        border-collapse:collapse;
+        padding:5px;
+      }
+      .email-table th {
+        border:1px solid #C0C0C0;
+        padding:5px;
+        background:#F0F0F0;
+      }
+      .email-table td {
+        border:1px solid #C0C0C0;
+        padding:5px;
+      }
+
     </style>
     <!--[if gte mso 9]>
       <style>
@@ -226,13 +242,34 @@
 
                 <!-- content -->
                 <div class="content">
-                <table>
+                <table class="email-table">
                   <tr>
                     <td>
-                      <h2>Welcome to RadicalRatios, <%= emailAddress %>!</h2>
-                      <p>You've created a gaming session for your students with the key <strong><%= key %></strong></p>
-                      <p>Bacon ipsum dolor amet labore in exercitation prosciutto, consequat chuck excepteur short ribs sausage ut occaecat frankfurter shankle. Drumstick tongue nostrud qui ham hock kielbasa. Laborum meatloaf ham hock magna ex, bacon fatback deserunt adipisicing est. Cillum fugiat salami consectetur dolore, corned beef in et t-bone. Pork loin t-bone nisi pork, culpa hamburger andouille ut pastrami lorem nulla. Strip steak corned beef meatloaf, fugiat tenderloin eu id enim in pork belly nulla sunt ipsum.</p>
-
+                      <h2>Thanks for using RadicalRatios, <%= emailAddress %>!</h2>
+                      <p>You've now closed the gaming session for your students associated to the following key: <strong><%= key %></strong></p>
+                      <br/>
+                      <p>Here's how each student performed per game:</p>
+                      <table>
+                        <caption>Students Scores</caption>
+                        <thead>
+                        <tr>
+                          <th><strong>Name</strong></th>
+                          <th><strong>Game</strong></th>
+                          <th><strong>Score</strong></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% for(var i = 0; i < session.students.length; i++) { %>
+                          <% for(var j = 0; j < session.students[i].games.length; j++) { %>
+                            <tr>
+                              <td><%= session.students[i].name %></td>
+                              <td><%= session.students[i].games[j].name %></td>
+                              <td><%= session.students[i].games[j].score %></td>
+                            </tr>
+                          <% } %>
+                        <% } %>
+                        </tbody>
+                      </table>
                     </td>
                   </tr>
                 </table>

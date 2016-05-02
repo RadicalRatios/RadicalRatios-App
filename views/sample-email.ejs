@@ -229,31 +229,8 @@
                 <table>
                   <tr>
                     <td>
-                      <h2>Thanks for using RadicalRatios, <%= emailAddress %>!</h2>
-                      <p>You've now closed the gaming session for your students associated to the following key: <strong><%= key %></strong></p>
-                      <br/>
-                      <p>Here's how each student performed per game:</p>
-                      <table>
-                        <caption>Students Scores</caption>
-                        <thead>
-                        <tr>
-                          <th><strong>Name</strong></th>
-                          <th><strong>Game</strong></th>
-                          <th><strong>Score</strong></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <% for(var i = 0; i < students.length; i++) { %>
-                          <% for(var j = 0; j < students[i].games.length; j++) { %>
-                            <tr>
-                              <td><%= students[i].name %></td>
-                              <td><%= students[i].games[j].name %></td>
-                              <td><%= students[i].games[j].score %></td>
-                            </tr>
-                          <% } %>
-                        <% } %>
-                        </tbody>
-                      </table>
+                      <h2>Welcome to RadicalRatios, <%= emailAddress %>!</h2>
+                      <p>You've created a gaming session for your students with the key <strong><%= key %></strong></p>
                     </td>
                   </tr>
                 </table>
