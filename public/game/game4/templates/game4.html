@@ -1,40 +1,123 @@
-<div class="jumbo-banner-green no-pad-bot" ng-init="init()">
-    <div class="container">
-    </div>
-</div>
-
-<div id="quintus_container" style="width: 800px; margin: 0px auto; position: relative;">
-    <canvas width="800" height="400" id="quintus" tabindex="0" style="height: 400px; width: 800px; position: relative; outline: 0px;">
-
-    </canvas>
-</div>
 <div class="row">
-    <div class="col-xs-12">
-        <div class="row">
-            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">
-                <h5>{{name}}</h5>
-            </div>
-        </div>
-        <div class="row row-space">
-            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">
-                <a class="btn btn-primary btn-block" ng-click="clearStages()">
-                    Clear Game
-                </a>
-            </div>
+<head>
+    <style>
+        .coins, .fakeCoin{
+            width: 100px;
+            height: 100px;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            margin-left: auto;
+            margin-right: auto;
+            /*margin-top:-80%;*/
+            -webkit-animation: example .2s; /* Chrome, Safari, Opera */
+            -webkit-transition-timing-function: ease-in-out;
+        }
+
+        @-webkit-keyframes example {
+            0%   {-webkit-transform: scale(0);}
+            60%  {-webkit-transform: scale(1.1);}
+            80%  {-webkit-transform: scale(.9);}
+            100%  {-webkit-transform: scale(1);}
+        }
+
+        .coins{
+            opacity: 1;
+            margin-bottom: -27%;
+            position: relative;
+            bottom: 77px;
+        }
+        .fakeCoin{
+            opacity: 0.5;
+        }
+
+
+        .changeCol{
+            bottom: 0px;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+        }
+        #quarter{
+            background-image: url("/images/quarterSprite.png");
+        }
+        #dime{
+            background-image: url("/images/dimeSprite.png");
+        }
+        #nickel{
+            background-image: url("/images/nickelSprite.png");
+        }
+        #penny{
+            background-image: url("/images/pennySprite.png");
+        }
+
+        .addBtn, .subBtn{
+            width: 96px;
+            margin-top: 15px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+
+
+    </style>
+</head>
+    <div class="row col-sm-12" style="height:550px;">
+        <div id="question" class="well" style="padding:0px; background-color: rgba(245,245,245, .6);">
+            <h3 style="text-align:center; margin-top: 10px; margin-bottom: 10px;">Make
+                <span class="label label-primary"><strong id='amt'></strong></span> using the most efficient ratio of coins.</h3>
+
         </div>
 
-        <div class="row row-space">
-            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">
-                <a class="btn btn-primary btn-block" ng-click="navBack()">
-                    Back
-                </a>
+        <div id="progressBar" class="progress" style="height: 22px; background-color: rgba(245,245,245, .6);">
+        </div>
+
+        <div id="row row-space change">
+            <div class="change  col-sm-3" id="quarterDiv" style="height: 430px;">
+                <div class="changeCol">
+                    <div class="fakeCoin" id="quarter"></div>
+                    <div class="buttons">
+                        <button class="subBtn btn btn-danger " id="quarterSubBtn"><h4>-</h4></button>
+                        <button class="addBtn btn btn-success " id="quarterAddBtn"><h4>+</h4></button>
+                    </div>
+                </div>
+            </div>
+            <div class="change  col-sm-3" id="dimeDiv" style="height: 430px;">
+                <div class="changeCol">
+                    <div class="fakeCoin" id="dime"></div>
+                    <div class="buttons">
+                        <button class="subBtn btn btn-danger " id="dimeSubBtn"><h4>-</h4></button>
+                        <button class="addBtn btn btn-success " id="dimeAddBtn"><h4>+</h4></button>
+                    </div>
+                </div>
+            </div>
+            <div class="change  col-sm-3" id="nickelDiv" style="height: 430px;">
+                <div class="changeCol">
+                    <div class="fakeCoin" id="nickel"></div>
+                    <div class="buttons">
+                        <button class="subBtn btn btn-danger " id="nickelSubBtn"><h4>-</h4></button>
+                        <button class="addBtn btn btn-success " id="nickelAddBtn"><h4>+</h4></button>
+                    </div>
+                </div>
+            </div>
+            <div class="change  col-sm-3" id="pennyDiv" style="height: 430px;">
+                <div class="changeCol">
+                    <div class="fakeCoin" id="penny"></div>
+                    <div class="buttons">
+                        <button class="subBtn btn btn-danger " id="pennySubBtn"><h4>-</h4></button>
+                        <button class="addBtn btn btn-success " id="pennyAddBtn"><h4>+</h4></button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <div class="row row-space col-sm-12">
+        <div class="col-sm-6">
+            <a class="btn btn-primary btn-block" ng-click="navBack()">
+                <h4>Back</h4>
+            </a>
+        </div>
+        <div class="col-sm-6">
+            <button class="btn btn-primary btn-block" id="submit" ><h4>Submit</h4></button>
+        </div>
+    </div>
 </div>
-
-
-
-
-
-
