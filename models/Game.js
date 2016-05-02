@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
 
 var Game = new Schema({
     name: String,
-    score: Number
+    score: Number,
+    studentId: String
 });
 
 module.exports = mongoose.model('Game', Game);

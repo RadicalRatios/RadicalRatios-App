@@ -99,7 +99,7 @@ router.route('/session/:id')
                     console.log('Email sent!');
                 });
 
-            // Remove session
+            // Remove sessions, students, games
             Session.remove({
                 _id: sessionDoc._id
             }, function(err, bear) {
@@ -129,6 +129,7 @@ router.route('/session/:id/student')
 
                 var newStudent = new Student();
                 newStudent.name = req.body.name;
+                newStudent.sessionId = sessionDoc._id;
 
                 newStudent.save(function (err, studentDoc) {
                     if (err) {
@@ -141,6 +142,7 @@ router.route('/session/:id/student')
                         var newGame = new Game();
                         newGame.name = game + i;
                         newGame.score = 0;
+                        newGame.studentId = studentDoc._id;
 
                         newStudent.games.push(newGame);
                         newGame.save();

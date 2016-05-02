@@ -4,7 +4,15 @@ var mongoose = require('mongoose'),
 
 var Student = new Schema({
     name: String,
-    games: [Game]
+    games: [Game],
+    sessionId: String
+});
+
+Student.schema.pre('remove', function(next) {
+    Game.remove({studentId: this._id}).exec();
+    if (next) {
+        next();
+    }
 });
 
 module.exports = mongoose.model('Student', Student);
