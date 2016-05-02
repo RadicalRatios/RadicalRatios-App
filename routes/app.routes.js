@@ -71,6 +71,7 @@ router.route('/session/:id')
         Session.findById(req.params.id, function(err, sessionDoc) {
             if (err) {
                 res.send(err);
+                return;
             }
             res.json(sessionDoc);
         });
@@ -133,6 +134,7 @@ router.route('/session/:id/student')
                 newStudent.save(function (err, studentDoc) {
                     if (err) {
                         res.send(err);
+                        return;
                     }
                     // Create Game 1-4
                     var game = 'Game';
@@ -169,6 +171,7 @@ router.route('/session/:id/student/:id')
         Student.findById(req.params.id, function(err, sessionDoc) {
             if (err) {
                 res.send(err);
+                return;
             }
             res.json(sessionDoc);
         });
@@ -203,6 +206,7 @@ router.route('/session/:id/student/:studentId/game/:gameId')
                             sessionDoc.save(function(err) {
                                 if (err) {
                                     res.send(err);
+                                    return;
                                 }
                                 res.json(studentDoc);
                             });
