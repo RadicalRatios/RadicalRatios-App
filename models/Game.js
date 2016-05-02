@@ -1,6 +1,5 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    Student = require('./Student').schema;
+    Schema = mongoose.Schema;
 
 var Game = new Schema({
     name: String,

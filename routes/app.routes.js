@@ -82,33 +82,32 @@ router.route('/session/:id')
 
         Session.findOne( { key: req.params.id}, function(err, sessionDoc) {
 
-            req.app.mailer.send('session-end', {
-                    to: sessionDoc.email, // REQUIRED. This can be a comma delimited string
-                    subject: 'RadicalRatios - Session Closed', // REQUIRED.
-                    // Local params for email template:
-                    emailAddress: sessionDoc.email,
-                    key: sessionDoc.key,
-                    session: sessionDoc
-                }, function (err) {
+            if (!err && sessionDoc) {
+                req.app.mailer.send('session-end', {
+                        to: sessionDoc.email, // REQUIRED. This can be a comma delimited string
+                        subject: 'RadicalRatios - Session Closed', // REQUIRED.
+                        // Local params for email template:
+                        emailAddress: sessionDoc.email,
+                        key: sessionDoc.key,
+                        session: sessionDoc
+                    }, function (err) {
+                        if (err) {
+                            // handle error
+                            console.log(err);
+                            res.send('There was an error sending the email');
+                            return;
+                        }
+                        console.log('Email sent!');
+                    });
+
+                // Remove sessions, students, games
+                sessionDoc.remove(function(err, bear) {
                     if (err) {
-                        // handle error
-                        console.log(err);
-                        res.send('There was an error sending the email');
-                        return;
+                        res.send(err);
                     }
-                    console.log('Email sent!');
+                    res.json({ message: 'Session deleted' });
                 });
-
-            // Remove sessions, students, games
-            Session.remove({
-                _id: sessionDoc._id
-            }, function(err, bear) {
-                if (err) {
-                    res.send(err);
-                }
-
-                res.json({ message: 'Session deleted' });
-            });
+            }
 
             res.json({ message: 'Session ended' });
 

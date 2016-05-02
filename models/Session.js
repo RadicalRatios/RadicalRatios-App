@@ -1,11 +1,11 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    Student = require('./Student').schema;
+    Student = require('./Student');
 
 var Session = new Schema({
     key: String,
     email: String,
-    students: [Student]
+    students: [Student.schema]
 });
 
 Session.methods.createKey = function createKey (cb) {
@@ -22,10 +22,14 @@ Session.methods.createKey = function createKey (cb) {
 };
 
 Session.pre('remove', function(next) {
-    Student.remove({sessionKey: this.key}).exec();
-    if (next) {
-        next();
-    }
+    Student.find({sessionKey: this.key}, function(err, docs) {
+        for (var i = 0; i < docs.length; ++i) {
+            docs[i].remove();
+        }
+        if (next) {
+            next();
+        }
+    });
 });
 
 module.exports = mongoose.model('Session', Session);
