@@ -2,7 +2,7 @@
 
 angular.module('RadicalRatios.game.game2', ['ngRoute'])
 
-    .controller('Game2Controller',['$scope','$location', function($scope, $location){
+    .controller('Game2Controller',['$scope','$location','$uibModal', function($scope, $location, $uibModal){
         $scope.name = "Game 2";
 
         $scope.navBack = function(){
@@ -29,7 +29,42 @@ angular.module('RadicalRatios.game.game2', ['ngRoute'])
          }*/
 
 
+        $scope.correctModal = function(){
+            var correctModalInstance = $uibModal.open({
+                templateUrl: '/answer/templates/correct.html',
+                size: 'md'
+            });
+        }
 
+        $scope.incorrectModal = function(){
+            var incorrectModalInstance = $uibModal.open({
+                templateUrl: '/answer/templates/incorrectBubbles.html',
+                size: 'md',
+                controller: 'IncorrectController',
+                resolve: {
+                    answer: function () {
+                        return answer;
+                    }
+                }
+            });
+        }
+
+        $scope.gameoverModal = function(){
+            var gameoverModalInstance = $uibModal.open({
+                templateUrl: '/answer/templates/gameover.html',
+                size: 'md',
+                controller: 'GameoverController',
+                resolve: {
+                    score: function () {
+                        return userScore;
+                    },
+
+                    gameNumber: function () {
+                        return 2;
+                    }
+                }
+            });
+        }
 //----------------------------------Set the variables-------------------------------------
         var bubblesArray = [];
         var dynamic = 700;
@@ -40,12 +75,16 @@ angular.module('RadicalRatios.game.game2', ['ngRoute'])
         var question = "null";
         var answer = 0;
         var userScore = 0;
+        var doneFlag = false;
 
+        var totalQs = 0;
         var x = 0;
         var y = 0;
         var x1 = 2;
         var z = 4;
         var y1 = 8;
+        addObject("newQuestion");
+        $scope.crossMult = "";
 //-----------------------------------------------------------------------------------------
 
 
@@ -145,8 +184,12 @@ angular.module('RadicalRatios.game.game2', ['ngRoute'])
 
 //---------------------------------Game Loop-------------------------------------------
         function gameLoop() {
+            if((totalQs >= 10) && (doneFlag==false)){
+                doneFlag = true;
+                setTimeout(endGame, 3000);
+            }
+
             clear();
-            drawText("User Score: " + userScore, 100, 30, 20, "#FF0000");
             setSpeed();
             generateAnswer();
             //setQuestionBox();
@@ -250,21 +293,28 @@ angular.module('RadicalRatios.game.game2', ['ngRoute'])
                 if (dist < bubble.radius) {
                     //playSound(sound);
                     if(bubble.num == answer){
-                        userScore += 10;
-                        generateRandomNumbers();
+                        userScore += 1;
+                        totalQs +=1;
                         bubble.speed = 700;
                         bubble.x = Math.floor(Math.random() * 800);
                         bubble.num = answer;
                         // setBubbleValues(bubble1, 750);
+                        $scope.correctModal();
+                        addObject("correctAnswer");
+                        addObject("newQuestion");
+                        generateRandomNumbers();
+
                     }
                     else{
-                        userScore -= 10;
-                        checkNegativeScore();
-                        generateRandomNumbers();
+                        totalQs +=1;
                         bubble.speed = 700;
                         bubble.x = Math.floor(Math.random() * 800);
                         bubble.num = answer;
+                        $scope.incorrectModal();
+                        addObject("wrongAnswer");
+                        addObject("newQuestion");
                         // setBubbleValues(bubble1, 750);
+                        generateRandomNumbers();
                     }
                     // userScore += 10;
                     // generateRandomNumbers();
@@ -275,65 +325,95 @@ angular.module('RadicalRatios.game.game2', ['ngRoute'])
                 }
                 else if(dist1 < bubble1.radius){
                     if(bubble1.num == answer){
-                        userScore += 10;
+                        userScore += 1;
+                        totalQs +=1;
+                        $scope.correctModal();
+                        addObject("correctAnswer");
+                        addObject("newQuestion");
                         generateRandomNumbers();
                         setBubbleValues(bubble1, 750);
                     }
                     else{
-                        userScore -= 10;
-                        checkNegativeScore();
+                        totalQs +=1;
+                        $scope.incorrectModal();
+                        addObject("wrongAnswer");
+                        addObject("newQuestion");
                         generateRandomNumbers();
                         setBubbleValues(bubble1, 750);
                     }
                 }
                 else if(dist2 < bubble2.radius){
                     if(bubble2.num == answer){
-                        userScore += 10;
+                        userScore += 1;
+                        totalQs +=1;
+                        $scope.correctModal();
+                        addObject("correctAnswer");
+                        addObject("newQuestion");
                         generateRandomNumbers();
                         setBubbleValues(bubble2, 790);
                     }
                     else{
-                        userScore -= 10;
-                        checkNegativeScore();
+                        totalQs +=1;
+                        $scope.incorrectModal();
+                        addObject("wrongAnswer");
+                        addObject("newQuestion");
                         generateRandomNumbers();
                         setBubbleValues(bubble2, 790);
                     }
                 }
                 else if(dist3 < bubble3.radius){
                     if(bubble3.num == answer){
-                        userScore += 10;
+                        userScore += 1;
+                        totalQs +=1;
+                        $scope.correctModal();
+                        addObject("correctAnswer");
+                        addObject("newQuestion");
                         generateRandomNumbers();
                         setBubbleValues(bubble3, 820);
                     }
                     else{
-                        userScore -= 10;
-                        checkNegativeScore();
+                        totalQs +=1;
+                        $scope.incorrectModal();
+                        addObject("wrongAnswer");
+                        addObject("newQuestion");
                         generateRandomNumbers();
                         setBubbleValues(bubble3, 820);
                     }
                 }
                 else if(dist4 < bubble4.radius){
                     if(bubble4.num == answer){
-                        userScore += 10;
+                        userScore += 1;
+                        totalQs +=1;
+                        $scope.correctModal();
+                        addObject("correctAnswer");
+                        addObject("newQuestion");
                         generateRandomNumbers();
                         setBubbleValues(bubble4, 880);
                     }
                     else{
-                        userScore -= 10;
-                        checkNegativeScore();
+                        totalQs +=1;
+                        $scope.incorrectModal();
+                        addObject("wrongAnswer");
+                        addObject("newQuestion");
                         generateRandomNumbers();
                         setBubbleValues(bubble4, 880);
                     }
                 }
                 else if(dist5 < bubble5.radius){
                     if(bubble5.num == answer){
-                        userScore += 10;
+                        userScore += 1;
+                        totalQs +=1;
+                        $scope.correctModal();
+                        addObject("correctAnswer");
+                        addObject("newQuestion");
                         generateRandomNumbers();
                         setBubbleValues(bubble5, 940);
                     }
                     else{
-                        userScore -= 10;
-                        checkNegativeScore();
+                        totalQs +=1;
+                        $scope.incorrectModal();
+                        addObject("wrongAnswer");
+                        addObject("newQuestion");
                         generateRandomNumbers();
                         setBubbleValues(bubble5, 940);
                     }
@@ -349,35 +429,30 @@ angular.module('RadicalRatios.game.game2', ['ngRoute'])
 
 //Helper Functions
         function setSpeed(){
-            bubble.speed = bubble.speed - 1.5;
+            bubble.speed = bubble.speed - 1.4;
             bubble1.speed = bubble1.speed - 1.5;
-            bubble2.speed = bubble2.speed - 1.5;
-            bubble3.speed = bubble3.speed - 1.5;
-            bubble4.speed = bubble4.speed - 1.5;
+            bubble2.speed = bubble2.speed - 1.3;
+            bubble3.speed = bubble3.speed - 1.3;
+            bubble4.speed = bubble4.speed - 1.6;
             bubble5.speed = bubble5.speed - 1.5;
         }
 
         function setBubbleValues(bubble, s){
             bubble.speed = s;
             bubble.x = Math.floor(Math.random() * 740) + 60;
-            bubble.num = Math.floor(Math.random() * 20);
+            bubble.num = Math.floor(Math.random() * 9);
             movement = bubble.x + 200;
         }
 
 
-        function drawRect(x,y,w,h,col){
-            ctx.fillStyle = col;
-            ctx.fillRect(x,y,w,h);
-        }
-
         function setQuestionBox(){
-            drawRect(qB.x, qB.y, qB.width, qB.height, qB.color);
             generateQuestion();
         }
 
         function generateQuestion(){
             question = "x/" + x1 + " = " + z + "/" + y1;
-            drawText(question, qB.x + 100, qB.y + 25, 20, "#FF0000");
+            $scope.crossMult = question;
+
         }
 
         function generateAnswer(){
@@ -389,18 +464,57 @@ angular.module('RadicalRatios.game.game2', ['ngRoute'])
         }
 
         function generateRandomNumbers() {
-            x1 = Math.floor(Math.random() * 20) + 1;
-            z = Math.floor(Math.random() * 20) + 1;
-            y1 = Math.floor(Math.random() * 20) + 1;
+            x1 = Math.floor(Math.random() * 9) + 1;
+            z = Math.floor(Math.random() * 9) + 1;
+            y1 = Math.floor(Math.random() * 9) + 1;
         }
 
-        function checkNegativeScore(){
-            if(userScore < 0){
-                userScore = 0;
-            }
-        }
 
 //start the game
         var updatePipes = setInterval(gameLoop,30);
+
+        function addObject(t){
+            var x = document.createElement('div');
+
+            if (t == "correctAnswer"){
+                var bar = document.getElementById("progressBar")
+                bar.removeChild(bar.lastChild)
+                x.className="progress-bar progress-bar-success";
+                var y = document.createElement('span');
+                y.className="glyphicon glyphicon-ok";
+                x.appendChild(y);
+                bar.appendChild(x);
+            }
+            else if (t == "wrongAnswer"){
+                var bar = document.getElementById("progressBar")
+                bar.removeChild(bar.lastChild)
+                x.className="progress-bar progress-bar-danger";
+                var y = document.createElement('span');
+                y.className="glyphicon glyphicon-remove";
+                x.appendChild(y);
+                bar.appendChild(x);
+            }
+            else if (t == "newQuestion"){
+                var bar = document.getElementById("progressBar")
+                x.className="progress-bar progress-bar-striped progress-bar-info active ";
+                bar.appendChild(x);
+            }
+
+
+        }
+
+        function endGame(){
+            setTimeout(function()
+                {
+                    $scope.gameoverModal();
+                    setTimeout(function()
+                        {
+                            $location.path( "/game" );
+                        }
+                        , 1000);
+                }
+                , 1000);
+
+        }
 
     }]);
