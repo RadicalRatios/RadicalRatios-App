@@ -18,28 +18,37 @@ router.route('/session')
 
         if (req.app && req.body.email) {
             newSession.email = req.body.email
-            console.log(newSession);
 
-            req.app.mailer.send('sample-email', {
-                to: req.body.email, // REQUIRED. This can be a comma delimited string
-                subject: 'Test Email', // REQUIRED.
-                // Local params for email template:
-                emailAddress: req.body.email,
-                key: newSession.key
-            }, function (err) {
+            newSession.save(function(err, sessionDoc) {
                 if (err) {
-                    // handle error
-                    console.log(err);
-                    res.send('There was an error sending the email');
-                    return;
+                    res.send({ error: err });
+                } else {
+                    console.log('Session created!');
+                    console.log(sessionDoc);
+
+                    req.app.mailer.send('sample-email', {
+                        to: req.body.email, // REQUIRED. This can be a comma delimited string
+                        subject: 'Test Email', // REQUIRED.
+                        // Local params for email template:
+                        emailAddress: req.body.email,
+                        key: sessionDoc.key
+                    }, function (err) {
+                        if (err) {
+                            // handle error
+                            console.log(err);
+                            res.send('There was an error sending the email');
+                            return;
+                        }
+                        console.log('Email sent!');
+                    });
+
+                    // Send response with new sessino
+                    res.json({
+                        session: sessionDoc
+                    });
                 }
-                console.log('Email sent!');
             });
         }
-
-        res.json({
-            session: newSession
-        });
     })
 
     /*
@@ -138,10 +147,12 @@ router.route('/session/:id/student')
         var sessionKey = req.body.session;
 
         Session.findOne({ key: sessionKey}, function(err, session) {
+            if (!err && session) {
+                var newStudent = new Student();
 
-        });
-        Student.find({}, function (err, gameDocs) {
-            res.json(gameDocs);
+            } else {
+                res.json({ error: err});
+            }
         });
     });
 
