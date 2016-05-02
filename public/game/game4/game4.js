@@ -472,11 +472,18 @@ angular.module('RadicalRatios.game.game4', ['ngRoute', 'Quintus'])
         }
 
         function endGame(){
-            setTimeout(function() {
-                $scope.gameoverModal();
-                $location.path( "/game" ); }, 1000);
-        }
+            setTimeout(function()
+                {
+                    $scope.gameoverModal();
+                    setTimeout(function()
+                        {
+                            $location.path( "/game" );
+                        }
+                        , 1000);
+                }
+                , 1000);
 
+        }
         $scope.navBack = function(){
             $location.path( "/game" );
         };

@@ -231,9 +231,17 @@ angular.module('RadicalRatios.game.game1', ['ngRoute'])
         }
 
         function endGame(){
-            setTimeout(function() {
+            setTimeout(function()
+            {
                 $scope.gameoverModal();
-                $location.path( "/game" ); }, 1000);
+                setTimeout(function()
+                    {
+                        $location.path( "/game" );
+                    }
+                    , 1000);
+            }
+                , 1000);
+
         }
 
         newProblem();
