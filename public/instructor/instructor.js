@@ -16,7 +16,7 @@ angular.module('RadicalRatios.instructor', [
         $scope.keyGenerate = false;
         $scope.closedSession = false;
         $scope.inputError = false;
-        $scope.radioModel = 'Left';
+        $scope.radioModel = 'Middle';
 
         function isEmpty(str) {
             return (!str || 0 === str.length);
