@@ -21,7 +21,7 @@ Session.methods.createKey = function createKey (cb) {
     }
 };
 
-Session.schema.pre('remove', function(next) {
+Session.pre('remove', function(next) {
     Student.remove({sessionId: this._id}).exec();
     if (next) {
         next();

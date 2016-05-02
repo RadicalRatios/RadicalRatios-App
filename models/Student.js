@@ -8,7 +8,7 @@ var Student = new Schema({
     sessionId: String
 });
 
-Student.schema.pre('remove', function(next) {
+Student.pre('remove', function(next) {
     Game.remove({studentId: this._id}).exec();
     if (next) {
         next();
