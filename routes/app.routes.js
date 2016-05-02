@@ -187,28 +187,29 @@ router.route('/session/:id/student/:studentId/game/:gameId')
 
         Session.findOne({ key: sessionKey}, function(err, sessionDoc) {
             if (!err && sessionDoc) {
-                Student.findById( req.params.studentId, function(err, studentDoc) {
-                    if (!err && studentDoc) {
-                        Game.findOne({ name: 'Game' + req.params.gameId}, function(err, gameDoc) {
-                            if (!err && gameDoc) {
-                                if (req.body.score > gameDoc.score) {
-                                    gameDoc.score = req.body.score;
-                                }
+                for(var j = 0; j < sessionDoc.students.length; ++j) {
+                    var studentDoc = sessionDoc.students[j];
+                    console.log(studentDoc);
+                    for(var i = 0; i < studentDoc.games.length; ++i) {
+                        var gameDoc = studentDoc.games[i];
+                        console.log(gameDoc);
+                        if (gameDoc.name == 'Game' + req.params.gameId) {
+                            if (req.body.score > gameDoc.score) {
+                                gameDoc.score = req.body.score;
                                 gameDoc.markModified('score');
-                                sessionDoc.save(function(err) {
-                                    if (err) {
-                                        res.send(err);
-                                    }
-                                    res.json(gameDoc);
-                                });
-                            } else {
                             }
-                        });
-                    } else {
-                        res.send(err);
-                    }
+                            studentDoc.markModified('games');
+                            sessionDoc.markModified('students');
 
-                });
+                            sessionDoc.save(function(err) {
+                                if (err) {
+                                    res.send(err);
+                                }
+                                res.json(studentDoc);
+                            });
+                        }
+                    }
+                }
             } else {
                 res.send(err);
             }
