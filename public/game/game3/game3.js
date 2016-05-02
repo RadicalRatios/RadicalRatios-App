@@ -2,7 +2,11 @@
 
 angular.module('RadicalRatios.game.game3', ['ngRoute'])
 
-    .controller('Game3Controller',['$scope','$location', function($scope, $location){
+    .controller('Game3Controller',['$scope','$location', '$uibModal',function($scope, $location, $uibModal){
+
+
+
+        addObject("newQuestion");
         $(document).ready(function(){
 //var canvasElement = document.querySelector("#myCanvas");
             var canvas = document.getElementById("myCanvas2");
@@ -18,7 +22,7 @@ angular.module('RadicalRatios.game.game3', ['ngRoute'])
             var reset6 = 0;
             var reset7 = 0;
             var reset8 = 0;
-
+            var doneFlag = false;
 //Question Ratio Randomizers
             var shuffleRatio = Math.floor(Math.random() * 8) + 2;
             var edgeRatio = Math.floor(Math.random() * 4) + 1;
@@ -50,9 +54,52 @@ angular.module('RadicalRatios.game.game3', ['ngRoute'])
                 var wrongAnswer2 = Math.floor(Math.random() * 30) + 1;
             }
 
+            $scope.correctModal = function(){
+                var correctModalInstance = $uibModal.open({
+                    templateUrl: '/answer/templates/correct.html',
+                    size: 'md'
+                });
+            }
+
+            $scope.incorrectModal = function(){
+                var incorrectModalInstance = $uibModal.open({
+                    templateUrl: '/answer/templates/incorrectBubbles.html',
+                    size: 'md',
+                    controller: 'IncorrectController',
+                    resolve: {
+                        answer: function () {
+                            return answerEdge;
+                        }
+                    }
+                });
+            }
+
+            $scope.gameoverModal = function(){
+                var gameoverModalInstance = $uibModal.open({
+                    templateUrl: '/answer/templates/gameover.html',
+                    size: 'md',
+                    controller: 'GameoverController',
+                    resolve: {
+                        score: function () {
+                            return userScore;
+                        },
+
+                        gameNumber: function () {
+                            return 3;
+                        }
+                    }
+                });
+            }
+
 
 //Game Loop used to Show each Question 1-10
             function gameLoop(){
+
+                if((questionNum >= 10) && (doneFlag==false)){
+                    doneFlag = true;
+                    setTimeout(endGame, 3000);
+                }
+
                 clearCanvas();
                 if(questionNum == 1){
                     drawTriangle1();
@@ -182,10 +229,7 @@ angular.module('RadicalRatios.game.game3', ['ngRoute'])
                     //drawText(randomEdge1, 590, 350, 20, "#FF0000");
                     drawText("x", 620, 200, 20, "#FF0000");
                 }
-                else{
-                    //clearCanvas();
-                    alert("All Questions Answered! Total score = " + userScore);
-                }
+
 
             }
 
@@ -202,13 +246,17 @@ angular.module('RadicalRatios.game.game3', ['ngRoute'])
             $("#answer1").click(function() {
                 var value1 = $(this).text();
                 if(value1 == answerEdge){
-                    userScore += 10;
+                    userScore += 1;
                     questionNum++;
-                    alert("Correct! Your score is: " + userScore);
+                    $scope.correctModal();
+                    addObject("correctAnswer");
+                    addObject("newQuestion");
                 }
                 else{
                     questionNum++;
-                    alert("Incorrect! Your score is: " + userScore);
+                    $scope.incorrectModal();
+                    addObject("wrongAnswer");
+                    addObject("newQuestion");
                 }
                 //alert(value1);
             });
@@ -216,13 +264,17 @@ angular.module('RadicalRatios.game.game3', ['ngRoute'])
             $("#answer2").click(function() {
                 var value2 = $(this).text();
                 if(value2 == answerEdge){
-                    userScore += 10;
+                    userScore += 1;
                     questionNum++;
-                    alert("Correct! Your score is: " + userScore);
+                    $scope.correctModal();
+                    addObject("correctAnswer");
+                    addObject("newQuestion");
                 }
                 else{
                     questionNum++;
-                    alert("Incorrect! Your score is: " + userScore);
+                    $scope.incorrectModal();
+                    addObject("wrongAnswer");
+                    addObject("newQuestion");
                 }
                 //alert(value2);
             });
@@ -230,13 +282,17 @@ angular.module('RadicalRatios.game.game3', ['ngRoute'])
             $("#answer3").click(function() {
                 var value3 = $(this).text();
                 if(value3 == answerEdge){
-                    userScore += 10;
+                    userScore += 1;
                     questionNum++;
-                    alert("Correct! Your score is: " + userScore);
+                    $scope.correctModal();
+                    addObject("correctAnswer");
+                    addObject("newQuestion");
                 }
                 else{
                     questionNum++;
-                    alert("Incorrect! Your score is: " + userScore);
+                    $scope.incorrectModal();
+                    addObject("wrongAnswer");
+                    addObject("newQuestion");
                 }
                 //alert(value3);
             });
@@ -244,13 +300,17 @@ angular.module('RadicalRatios.game.game3', ['ngRoute'])
             $("#answer4").click(function() {
                 var value4 = $(this).text();
                 if(value4 == answerEdge){
-                    userScore += 10;
+                    userScore += 1;
                     questionNum++;
-                    alert("Correct! Your score is: " + userScore);
+                    $scope.correctModal();
+                    addObject("correctAnswer");
+                    addObject("newQuestion");
                 }
                 else{
                     questionNum++;
-                    alert("Incorrect! Your score is: " + userScore);
+                    $scope.incorrectModal();
+                    addObject("wrongAnswer");
+                    addObject("newQuestion");
                 }
                 //alert(value4);
             });
@@ -384,6 +444,48 @@ angular.module('RadicalRatios.game.game3', ['ngRoute'])
         });
         $scope.navBack = function(){
             $location.path( "/game" );
+        }
+
+        function endGame(){
+            setTimeout(function()
+                {
+                    $scope.gameoverModal();
+                    setTimeout(function()
+                        {
+                            $location.path( "/game" );
+                        }
+                        , 1000);
+                }
+                , 1000);
+
+        }
+
+        function addObject(t){
+            var x = document.createElement('div');
+
+            if (t == "correctAnswer"){
+                var bar = document.getElementById("progressBar")
+                bar.removeChild(bar.lastChild)
+                x.className="progress-bar progress-bar-success";
+                var y = document.createElement('span');
+                y.className="glyphicon glyphicon-ok";
+                x.appendChild(y);
+                bar.appendChild(x);
+            }
+            else if (t == "wrongAnswer"){
+                var bar = document.getElementById("progressBar")
+                bar.removeChild(bar.lastChild)
+                x.className="progress-bar progress-bar-danger";
+                var y = document.createElement('span');
+                y.className="glyphicon glyphicon-remove";
+                x.appendChild(y);
+                bar.appendChild(x);
+            }
+            else if (t == "newQuestion"){
+                var bar = document.getElementById("progressBar")
+                x.className="progress-bar progress-bar-striped progress-bar-info active ";
+                bar.appendChild(x);
+            }
         }
 
     }]);
