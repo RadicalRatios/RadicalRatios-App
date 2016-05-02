@@ -22,6 +22,7 @@ router.route('/session')
             newSession.save(function(err, sessionDoc) {
                 if (err) {
                     res.send(err);
+                    return;
                 } else {
                     req.app.mailer.send('sample-email', {
                         to: req.body.email, // REQUIRED. This can be a comma delimited string
