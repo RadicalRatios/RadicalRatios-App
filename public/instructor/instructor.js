@@ -2,8 +2,8 @@
 
 angular.module('RadicalRatios.instructor', [
     ])
-    .controller('InstructorController', ['$scope', '$location', 'Instructor', 'Game',
-        function($scope, $location, Instructor, Game){
+    .controller('InstructorController', ['$scope', '$location', 'Instructor', 'Student', 'Game',
+        function($scope, $location, Instructor, Student, Game){
 
         $scope.sessionKey = null;
         $scope.closedGameKey = null;
@@ -21,6 +21,28 @@ angular.module('RadicalRatios.instructor', [
         function isEmpty(str) {
             return (!str || 0 === str.length);
         }
+
+        $scope.linkSession = function() {
+            var key = $scope.studentKey;
+            console.log('linking session ' + $scope.studentKey + ' to ' + $scope.studentName);
+            clearAllDialog();
+            $scope.keyLink = true;
+
+            if(isEmpty($scope.studentKey) || isEmpty($scope.studentName)){
+                $scope.inputError = true;
+                $scope.messages = {
+                    third: 'Attention!',
+                    fourth: 'You must fill in all information.'
+                };
+            } else {
+                Student.joinSession($scope.studentKey, $scope.studentName).then(function(studentResp) {
+                    $scope.messages = {
+                        third: 'Sucess ' + studentResp.name + '!',
+                        fourth: 'You\'ve joined the session ' + key
+                    };
+                });
+            }
+        };
 
         $scope.generateKey = function(){
             clearAllDialog();
@@ -73,6 +95,7 @@ angular.module('RadicalRatios.instructor', [
         }
 
         var clearAllDialog = function(){
+            $scope.keyLink = false;
             $scope.keyGenerate = false;
             $scope.closedSession = false;
             $scope.messages = null;

@@ -129,10 +129,26 @@ router.route('/games')
         });
     });
 
+router.route('/session/:id/student')
+
+    /*
+    * Creates a Student, Adds to session
+    */
+    .post(function(req, res) {
+        var sessionKey = req.body.session;
+
+        Session.findOne({ key: sessionKey}, function(err, session) {
+
+        });
+        Student.find({}, function (err, gameDocs) {
+            res.json(gameDocs);
+        });
+    });
+
 router.route('/session/:id/game/:gameId/student/:studentId')
 
     /*
-    * Returns Student score
+    * Returns Student
     */
     .get(function(req, res) {
 

@@ -4,8 +4,7 @@ var mongoose = require('mongoose'),
 
 var Student = new Schema({
     name: String,
-    // scores: [ { game: Game, score: Number} ]
-    scores: { type : Array , "default" : [] }
+    scores: { type : Array , "default" : [] } // [ { game: Game, score: Number } ]
 });
 
 module.exports = mongoose.model('Student', Student);
