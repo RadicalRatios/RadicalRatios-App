@@ -9,7 +9,7 @@ var Session = new Schema({
 });
 
 Session.methods.createKey = function createKey (cb) {
-    var possibleKeyLength = 5;
+    var possibleKeyLength = 7;
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     this.key = '';
 
@@ -22,7 +22,7 @@ Session.methods.createKey = function createKey (cb) {
 };
 
 Session.pre('remove', function(next) {
-    Student.remove({sessionId: this._id}).exec();
+    Student.remove({sessionKey: this.key}).exec();
     if (next) {
         next();
     }

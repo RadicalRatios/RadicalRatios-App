@@ -8,6 +8,7 @@ angular.module('RadicalRatios.services.student', [
         // Student can have...
         // - _id
         // - name
+        // - sessionKey
         // - games: [ { name: GameX, score: Number } ]
         var student = {};
 

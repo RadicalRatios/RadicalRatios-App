@@ -5,13 +5,13 @@ angular.module('RadicalRatios.services.game', [
 
     .service('Game', [ '$q', '$http', function($q, $http) {
 
-        function updateScore(sessionId, gameId, studentId, score) {
+        function updateScore(sessionId, studentId, gameNumber, score) {
             var deferred = $q.defer();
 
-            // var url = '/session/:id/games/:gameId/student/:studentId';
-            var calloutUrl = '/session/' + sessionId + '/game/' + gameId + '/student/' + studentId;
+            // var url = '/session/:id/student/:studentId/game/:gameId';
+            var calloutUrl = '/session/' + sessionId + '/student/' + studentId + '/game/' + gameNumber;
 
-            $http.get('/api' + calloutUrl, {name: name, score: score})
+            $http.post('/api' + calloutUrl, {score: score})
                 .then(function(resp) {
                     deferred.resolve(resp);
                 }, function(resp) {

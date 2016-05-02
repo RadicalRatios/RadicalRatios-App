@@ -25,7 +25,7 @@ router.route('/session')
                 } else {
                     req.app.mailer.send('sample-email', {
                         to: req.body.email, // REQUIRED. This can be a comma delimited string
-                        subject: 'Test Email', // REQUIRED.
+                        subject: 'RadicalRatios - Session Created!', // REQUIRED.
                         // Local params for email template:
                         emailAddress: req.body.email,
                         key: sessionDoc.key
@@ -84,7 +84,7 @@ router.route('/session/:id')
 
             req.app.mailer.send('session-end', {
                     to: sessionDoc.email, // REQUIRED. This can be a comma delimited string
-                    subject: 'Test Email', // REQUIRED.
+                    subject: 'RadicalRatios - Session Closed', // REQUIRED.
                     // Local params for email template:
                     emailAddress: sessionDoc.email,
                     key: sessionDoc.key,
@@ -129,7 +129,7 @@ router.route('/session/:id/student')
 
                 var newStudent = new Student();
                 newStudent.name = req.body.name;
-                newStudent.sessionId = sessionDoc._id;
+                newStudent.sessionKey = sessionDoc.key;
 
                 newStudent.save(function (err, studentDoc) {
                     if (err) {
@@ -156,7 +156,7 @@ router.route('/session/:id/student')
                 });
 
             } else {
-                res.json(err);
+                res.send(err);
             }
         });
     });
@@ -183,18 +183,34 @@ router.route('/session/:id/student/:studentId/game/:gameId')
     * Returns updated Student score
     */
     .post(function(req, res) {
+        var sessionKey = req.params.id;
 
-        // TODO:
-        res.json({
-            id: 123,
-            game: {
-                id: 123,
-                name: 'Game X'
-            },
-            student: {
-                id: 123,
-                name: 'Jimmy Kid',
-                scope: 21
+        Session.findOne({ key: sessionKey}, function(err, sessionDoc) {
+            if (!err && sessionDoc) {
+                Student.findById( req.params.studentId, function(err, studentDoc) {
+                    if (!err && studentDoc) {
+                        Game.findOne({ name: 'Game' + req.params.gameId}, function(err, gameDoc) {
+                            if (!err && gameDoc) {
+                                if (req.body.score > gameDoc.score) {
+                                    gameDoc.score = req.body.score;
+                                }
+                                gameDoc.markModified('score');
+                                sessionDoc.save(function(err) {
+                                    if (err) {
+                                        res.send(err);
+                                    }
+                                    res.json(gameDoc);
+                                });
+                            } else {
+                            }
+                        });
+                    } else {
+                        res.send(err);
+                    }
+
+                });
+            } else {
+                res.send(err);
             }
         });
     });

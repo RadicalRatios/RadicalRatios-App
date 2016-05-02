@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 var Student = new Schema({
     name: String,
     games: [Game],
-    sessionId: String
+    sessionKey: String
 });
 
 Student.pre('remove', function(next) {

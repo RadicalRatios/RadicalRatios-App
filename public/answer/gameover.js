@@ -2,8 +2,9 @@
 
 angular.module('RadicalRatios.gameover', [
     ])
-    .controller('GameoverController', ['$scope', 'score', 'gameNumber','$rootScope',function($scope, score, gameNumber, $rootScope){
+    .controller('GameoverController', ['$scope', '$rootScope', 'Game', 'Student', 'score', 'gameNumber', function($scope, $rootScope, Game, Student, score, gameNumber){
         $scope.score = score;
+
         if(score < 4) {
             $scope.starType1 = "glyphicon-star-empty";
             $scope.starType2 = "glyphicon-star-empty";
@@ -31,6 +32,14 @@ angular.module('RadicalRatios.gameover', [
         }
 
         function updateGlobalScore(game, stars, score){
+            // Update server
+            Game.updateScore(Student.student.sessionKey, Student.student._id, game, score).then(function(resp) {
+                console.log('success', resp);
+            }, function(err) {
+                console.log('err', err);
+            });
+
+            // Update UI
             if(game === 1){
                 if((score > $rootScope.game1score)||(!angular.isDefined($rootScope.game1score))) {
                     $rootScope.game1score = score;

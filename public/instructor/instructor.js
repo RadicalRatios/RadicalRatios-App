@@ -83,9 +83,10 @@ angular.module('RadicalRatios.instructor', [
                     second: 'You must fill in all information.'};
             }
             else {
-                Instructor.closeSession($scope.gameKey).then(function() {
+                var closedKey = $scope.gameKey;
+                Instructor.closeSession(closedKey).then(function() {
                     $scope.closedSession = true;
-                    $scope.closedGameKey = gameKey;
+                    $scope.closedGameKey = closedKey;
                     clearInputs();
                 });
             }
