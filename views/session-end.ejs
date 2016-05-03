@@ -251,12 +251,11 @@
                       <br/>
                       <p>Here's how each student performed per game:</p>
                       <table>
-                        <caption>Students Scores</caption>
                         <thead>
                         <tr>
                           <th><strong>Name</strong></th>
-                          <th><strong>Game</strong></th>
-                          <th><strong>Score</strong></th>
+                          <th>&nbsp;&nbsp;&nbsp;<strong>Game</strong></th>
+                          <th>&nbsp;&nbsp;&nbsp;<strong>Score</strong></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -264,8 +263,8 @@
                           <% for(var j = 0; j < session.students[i].games.length; j++) { %>
                             <tr>
                               <td><%= session.students[i].name %></td>
-                              <td><%= session.students[i].games[j].name %></td>
-                              <td><%= session.students[i].games[j].score %></td>
+                              <td>&nbsp;&nbsp;&nbsp;<%= session.students[i].games[j].name %></td>
+                              <td>&nbsp;&nbsp;&nbsp;<%= session.students[i].games[j].score %></td>
                             </tr>
                           <% } %>
                         <% } %>
